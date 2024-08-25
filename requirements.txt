@@ -1,5 +1,6 @@
-alembic
-sqlalchemy
-psycopg2-binary
+aiogram==3.12.0
 python-dotenv
-aiogram
+sqlalchemy
+alembic
+psycopg2-binary
+
