@@ -1,9 +1,13 @@
 # utils/vpn_config.py
 
+# utils/vpn_config.py
+
 import subprocess
 import logging
 from sqlalchemy.orm import Session
 from db.models import VpnClient
+import config  # Импортируем настройки из config.py
+import os
 
 def generate_vpn_keys():
     """
@@ -100,8 +104,8 @@ Endpoint = {client.endpoint}
 AllowedIPs = {client.allowed_ips}
 PersistentKeepalive = {client.persistent_keepalive}
 """
-    
-    config_path = f"/etc/wireguard/configs/{client.telegram_id}.conf"
+
+    config_path = os.path.join(config.CONFIG_PATH_BASE, f"{client.telegram_id}.conf")
 
     try:
         with open(config_path, 'w') as config_file:
@@ -111,6 +115,30 @@ PersistentKeepalive = {client.persistent_keepalive}
     except IOError as e:
         logging.error(f"Failed to write VPN configuration file: {e}")
         raise Exception(f"Не удалось создать конфигурационный файл VPN: {e}")
+
+def add_client_to_wg_config(public_key: str, ip_address: str):
+    """
+    Добавляет нового клиента в конфигурационный файл WireGuard (wg0.conf).
+
+    Args:
+        public_key (str): Публичный ключ нового клиента.
+        ip_address (str): IP-адрес нового клиента в VPN-сети.
+    """
+    wg_config_path = '/etc/wireguard/wg0.conf'  # Путь к конфигурационному файлу WireGuard
+
+    new_peer_config = f"""
+[Peer]
+PublicKey = {public_key}
+AllowedIPs = {ip_address}/32
+"""
+    
+    try:
+        with open(wg_config_path, 'a') as wg_config_file:  # Открываем файл в режиме добавления
+            wg_config_file.write(new_peer_config)
+        logging.info(f"Added new client to WireGuard config: {ip_address}")
+    except IOError as e:
+        logging.error(f"Failed to add new client to WireGuard config: {e}")
+        raise Exception(f"Не удалось добавить нового клиента в конфигурацию WireGuard: {e}")
 
 def check_wireguard_status():
     """

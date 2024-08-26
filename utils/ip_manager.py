@@ -1,8 +1,10 @@
 # utils/ip_manager.py
-
 import logging
 from sqlalchemy.orm import Session
 from db.models import VpnClient
+
+# Импортируем настройки из config.py
+import config
 
 def get_free_ip(session: Session) -> str:
     """
@@ -18,7 +20,7 @@ def get_free_ip(session: Session) -> str:
         Exception: Если нет доступных IP-адресов.
     """
     logging.info("Starting search for a free IP address.")
-    base_ip = "10.20."  # Основной IP-адрес сети
+    base_ip = config.BASE_IP  # Используем значение из config.py
 
     # Перебор IP-адресов в указанном диапазоне
     for i in range(0, 256):
@@ -30,3 +32,4 @@ def get_free_ip(session: Session) -> str:
 
     logging.error("No free IP addresses available in the range.")
     raise Exception("Нет свободных IP-адресов в диапазоне.")
+

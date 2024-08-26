@@ -1,40 +1,39 @@
 # utils/qr_generator.py
-
-import qrcode
-import os
 import logging
+from sqlalchemy.orm import Session
+from db.models import VpnClient
 
-def generate_qr_code(config_content: str, client_id: str, output_directory: str = "qr_codes") -> str:
+# Импортируем настройки из config.py
+import config
+
+def get_free_ip(session: Session) -> str:
     """
-    Генерирует QR-код из содержимого конфигурационного файла WireGuard и сохраняет его в указанной директории.
+    Функция для получения следующего доступного IP-адреса в диапазоне.
 
     Args:
-        config_content (str): Содержимое конфигурационного файла WireGuard.
-        client_id (str): Уникальный идентификатор клиента для создания уникального имени файла.
-        output_directory (str): Директория, в которой будет сохранен QR-код.
+        session (Session): Сессия SQLAlchemy для доступа к базе данных.
 
     Returns:
-        str: Путь к сгенерированному файлу QR-кода.
+        str: Свободный IP-адрес.
 
     Raises:
-        Exception: Если не удалось создать QR-код.
+        Exception: Если нет доступных IP-адресов.
     """
-    try:
-        # Создание директории для QR-кодов, если она не существует
-        if not os.path.exists(output_directory):
-            os.makedirs(output_directory)
-            logging.info(f"Output directory {output_directory} created.")
+    logging.info("Starting search for a free IP address.")
+    
+    # Получаем базовый IP-адрес из config.py
+    base_ip = config.BASE_IP
 
-        # Уникальное имя файла для QR-кода
-        qr_code_path = os.path.join(output_directory, f"vpn_config_qr_{client_id}.png")
+    # Перебор IP-адресов в указанном диапазоне
+    for i in range(0, 256):
+        for j in range(1, 256):
+            ip = f"{base_ip}{i}.{j}"
+            # Проверяем, используется ли IP-адрес в базе данных
+            if not session.query(VpnClient).filter(VpnClient.address == ip).first():
+                logging.info(f"Found free IP address: {ip}")
+                return ip
 
-        # Генерация QR-кода
-        qr = qrcode.make(config_content)
-        qr.save(qr_code_path)
-        logging.info(f"QR code generated and saved to {qr_code_path}.")
+    # Если не найден ни один свободный IP-адрес, логируем ошибку и выбрасываем исключение
+    logging.error("No free IP addresses available in the range.")
+    raise Exception("Нет свободных IP-адресов в диапазоне.")
 
-        return qr_code_path
-
-    except Exception as e:
-        logging.error(f"Failed to generate QR code: {e}")
-        raise Exception(f"Не удалось создать QR-код: {e}")

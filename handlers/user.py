@@ -11,6 +11,9 @@ from utils.qr_generator import generate_qr_code
 from aiohttp import ClientConnectionError
 import asyncio
 import logging
+rom utils.vpn_config import generate_vpn_keys, generate_vpn_config, restart_wireguard, add_client_to_wg_config
+# Импортируем настройки из config.py
+import config
 
 router = Router()
 
@@ -30,28 +33,25 @@ async def cmd_status(message: types.Message):
     await message.answer("Ваш VPN активен.")
 
 async def handle_get_vpn_key(callback_query: types.CallbackQuery):
-    """Обработчик нажатия кнопки "Подключить VPN". Генерирует ключи, конфигурацию и QR-код."""
+    """Обработчик запроса на получение ключа VPN."""
     telegram_id = callback_query.from_user.id
     session = SessionLocal()
 
     try:
         user = session.query(User).filter(User.telegram_id == telegram_id).first()
-        
+
         if not user:
-            # Регистрация нового пользователя, если его нет в базе данных
             user = User(
                 telegram_id=telegram_id,
                 username=callback_query.from_user.username or '',
                 full_name=callback_query.from_user.full_name or '',
-                # Добавьте другие необходимые поля, если нужно
             )
             session.add(user)
             session.commit()
             await callback_query.message.answer("Вы были зарегистрированы в системе.")
-        
+
         client = session.query(VpnClient).filter(VpnClient.user_id == user.id).first()
         if client:
-            # Отправка кнопок для существующего VPN клиента
             keyboard = InlineKeyboardMarkup(inline_keyboard=[
                 [InlineKeyboardButton(text="QR код", callback_data="get_qr_code")],
                 [InlineKeyboardButton(text="Скачать конфигурацию", callback_data="download_config")],
@@ -67,31 +67,34 @@ async def handle_get_vpn_key(callback_query: types.CallbackQuery):
                 private_key=private_key,
                 public_key=public_key,
                 address=ip_address,
-                dns="8.8.8.8",
+                dns=config.VPN_DNS,
                 allowed_ips="0.0.0.0/0",
-                endpoint="147.45.232.192:443"
+                endpoint=config.VPN_ENDPOINT
             )
 
             session.add(new_client)
             session.commit()
             logging.info(f"New VPN client added for user {telegram_id}")
 
-            # Генерация конфигурационного файла
+            # Генерация конфигурационного файла клиента
             config_file = generate_vpn_config(new_client)
             with open(config_file, 'r') as file:
                 config_content = file.read()
 
             qr_code_path = generate_qr_code(config_content, client_id=telegram_id)
 
-            # Отправка кнопок после успешного создания VPN клиента
+            # Добавление нового клиента в конфигурацию сервера WireGuard
+            add_client_to_wg_config(public_key, ip_address)
+
+            # Перезапуск WireGuard для применения изменений
+            restart_wireguard()
+
             keyboard = InlineKeyboardMarkup(inline_keyboard=[
                 [InlineKeyboardButton(text="QR код", callback_data="get_qr_code")],
                 [InlineKeyboardButton(text="Скачать конфигурацию", callback_data="download_config")],
                 [InlineKeyboardButton(text="Инструкция", callback_data="get_instruction")]
             ])
             await callback_query.message.answer("VPN клиент успешно создан. Выберите действие:", reply_markup=keyboard)
-
-            restart_wireguard()
 
     except Exception as e:
         logging.error(f"An error occurred while handling VPN key request: {e}")
