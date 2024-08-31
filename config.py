@@ -26,6 +26,10 @@ VPN_DNS = "8.8.8.8"
 # Настройки сети
 BASE_IP = "10.20."
 
+# config.py
+
+MONGO_URI = "mongodb://localhost:27017/vpn_bot"
+
 # Другие настройки по умолчанию
 DEFAULT_LANGUAGE = "en"
 TIME_ZONE = "UTC"

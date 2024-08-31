@@ -209,4 +209,19 @@ async def process_successful_payment(message: types.Message):
         await message.answer('Спасибо за оплату! Ваша подписка активирована.')
     except Exception as e:
         logging.error(f"Ошибка при сохранении платежа: {e}")
-        await message.answer('Произошла ошибка при
+        await message.answer('Произошла ошибка при обработке вашего платежа.')
+    finally:
+        db.close()
+
+def register_handlers_user(router: Router):
+    """Регистрация обработчиков команд для пользователя."""
+    router.message.register(cmd_start, Command(commands=["start"]))
+    router.message.register(cmd_help, Command(commands=["help"]))
+    router.message.register(cmd_status, Command(commands=["status"]))
+    router.callback_query.register(handle_get_vpn_key, lambda c: c.data == "get_vpn_key")
+    router.callback_query.register(handle_get_qr_code, lambda c: c.data == "get_qr_code")
+    router.callback_query.register(handle_download_config, lambda c: c.data == "download_config")
+    router.callback_query.register(handle_get_instruction, lambda c: c.data == "get_instruction")
+    router.callback_query.register(process_pay_command, lambda c: c.data == "pay_vpn")
+    router.pre_checkout_query.register(pre_checkout_query_handler, lambda query: True)
+    router.message.register(process_successful_payment, content_types=types.ContentType.SUCCESSFUL_PAYMENT)
