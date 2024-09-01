@@ -1,4 +1,4 @@
-# db/models.py
+# models.py
 
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean, Float, DateTime, Numeric
 from sqlalchemy.orm import relationship
@@ -21,8 +21,9 @@ class User(Base):
 
     vpn_clients = relationship("VpnClient", back_populates="user")
     routers = relationship("Router", back_populates="user")
-    referrals = relationship("Referral", foreign_keys="[Referral.referrer_id]")
-    payments = relationship("Payment", back_populates="user")  # Новая связь с платежами
+    referrals = relationship("Referral", foreign_keys="[Referral.referrer_id]", back_populates="referrer", overlaps="referrer,referral")
+    referred_by = relationship("Referral", foreign_keys="[Referral.referral_id]", back_populates="referral", overlaps="referrer,referral")
+    payments = relationship("Payment", back_populates="user")  # Связь с платежами
 
 class VpnClient(Base):
     __tablename__ = 'vpn_clients'
@@ -50,8 +51,8 @@ class Referral(Base):
     bonus = Column(Integer, nullable=False)
     created_at = Column(DateTime)
 
-    referrer = relationship("User", foreign_keys=[referrer_id])
-    referral = relationship("User", foreign_keys=[referral_id])
+    referrer = relationship("User", foreign_keys=[referrer_id], back_populates="referrals", overlaps="referrer,referral")
+    referral = relationship("User", foreign_keys=[referral_id], back_populates="referred_by", overlaps="referrer,referral")
 
 class Router(Base):
     __tablename__ = 'routers'
@@ -59,8 +60,9 @@ class Router(Base):
     id = Column(Integer, primary_key=True, index=True)
     serial_number = Column(String, nullable=False)
     model = Column(String, nullable=False)
+    mac_address = Column(String, nullable=False)  # Добавляем поле для MAC-адреса
     user_id = Column(Integer, ForeignKey('users.id'))
-    vpn_config = Column(String, nullable=False)
+    vpn_config = Column(String, nullable=True)
     admin_access = Column(String)
     sale_date = Column(Date)
     warranty_expiration = Column(Date)
@@ -68,8 +70,11 @@ class Router(Base):
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
     comments = Column(String)
+    subdomain = Column(String, nullable=True, unique=True)  # Добавляем поддомен
+    dns_record_id = Column(String, nullable=True)  # Добавляем ID DNS-записи из Timeweb
 
     user = relationship("User", back_populates="routers")
+
 
 class Payment(Base):
     __tablename__ = 'payments'

@@ -1,40 +1,40 @@
-# db/database.py
 
-import os
+# database.py
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from pymongo import MongoClient
-from dotenv import load_dotenv
-from config import MONGO_URI
+import os
 
-# Загрузка переменных окружения из файла .env
-load_dotenv()
-
-# Настройки для PostgreSQL
+# Настройка URL базы данных из переменной окружения
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Проверьте, что SQLALCHEMY_DATABASE_URL не равно None
-if SQLALCHEMY_DATABASE_URL is None:
-    raise ValueError("DATABASE_URL is not set in the .env file.")
+if not SQLALCHEMY_DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set in environment variables")
 
-# Создание двигателя для подключения к базе данных PostgreSQL
+# Создание двигателя для взаимодействия с базой данных PostgreSQL
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-# Создание фабрики сессий (sessionmaker), которая будет создавать новые сессии для взаимодействия с базой данных PostgreSQL
+# Создание локальной сессии базы данных
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Создание базового класса для всех моделей данных (классов, представляющих таблицы в базе данных)
+# Базовый класс для всех моделей
 Base = declarative_base()
 
-# Настройки для MongoDB
-client = MongoClient(MONGO_URI)
-mongo_db = client.get_database()  # Это подключит вас к базе данных 'vpn_bot'
+# Функция для создания базы данных
+def init_db():
+    """
+    Инициализация базы данных: создание таблиц.
+    """
+    Base.metadata.create_all(bind=engine)
 
-# Проверка подключения к MongoDB
-try:
-    # Пробуем получить список коллекций
-    mongo_db.list_collection_names()
-    print("Подключение к MongoDB успешно установлено.")
-except Exception as e:
-    raise ValueError(f"Не удалось подключиться к MongoDB: {e}")
+# Функция для получения сессии базы данных
+def get_db():
+    """
+    Функция, создающая сессию для работы с базой данных.
+    Используйте этот метод для получения доступа к базе данных в функциях.
+    """
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

@@ -1,119 +1,124 @@
-# handlers/admin.py
+# admin.py
 
-from aiogram import types, Dispatcher
+from aiogram import Bot, types, Dispatcher, F
 from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import StatesGroup, State
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from db.database import SessionLocal
-from db.models import VpnClient, Router
-from utils.vpn_config import add_vpn_user, remove_vpn_user, restart_wireguard
-from utils.ddns import update_dns  # Импортируем функцию обновления DNS
+from db.models import Router
+from utils.barcode_scanner import scan_label
+from io import BytesIO
 import logging
 
-async def is_user_admin(message: types.Message) -> bool:
-    """Проверяет, является ли пользователь администратором в чате."""
-    chat_administrators = await message.bot.get_chat_administrators(message.chat.id)
-    user_id = message.from_user.id
-    return any(admin.user.id == user_id for admin in chat_administrators)
-
-async def cmd_add_user(message: types.Message):
-    """Обработчик команды /add_user. Добавляет пользователя в VPN по Telegram ID."""
-    if not await is_user_admin(message):
-        await message.answer("Эта команда доступна только администраторам.")
-        return
-
-    telegram_id = message.get_args()
-    if not telegram_id:
-        await message.answer("Пожалуйста, укажите Telegram ID пользователя.")
-        return
-
-    session = SessionLocal()
-    try:
-        client = session.query(VpnClient).filter(VpnClient.telegram_id == telegram_id).first()
-        if client:
-            success = add_vpn_user(client.public_key, client.address)
-            if success:
-                await message.answer(f"Пользователь {telegram_id} успешно добавлен в VPN.")
-                restart_wireguard()
-            else:
-                await message.answer("Не удалось добавить пользователя в VPN.")
-        else:
-            await message.answer("Пользователь с таким ID не найден.")
-    except Exception as e:
-        logging.error(f"Ошибка при добавлении пользователя в VPN: {e}")
-        await message.answer("Произошла ошибка при добавлении пользователя в VPN.")
-    finally:
-        session.close()
-
-async def cmd_remove_user(message: types.Message):
-    """Обработчик команды /remove_user. Удаляет пользователя из VPN по Telegram ID."""
-    if not await is_user_admin(message):
-        await message.answer("Эта команда доступна только администраторам.")
-        return
-
-    telegram_id = message.get_args()
-    if not telegram_id:
-        await message.answer("Пожалуйста, укажите Telegram ID пользователя.")
-        return
-
-    session = SessionLocal()
-    try:
-        client = session.query(VpnClient).filter(VpnClient.telegram_id == telegram_id).first()
-        if client:
-            success = remove_vpn_user(client.public_key)
-            if success:
-                await message.answer(f"Пользователь {telegram_id} успешно удален из VPN.")
-                restart_wireguard()
-            else:
-                await message.answer("Не удалось удалить пользователя из VPN.")
-        else:
-            await message.answer("Пользователь с таким ID не найден.")
-    except Exception as e:
-        logging.error(f"Ошибка при удалении пользователя из VPN: {e}")
-        await message.answer("Произошла ошибка при удалении пользователя из VPN.")
-    finally:
-        session.close()
+class RouterRegistration(StatesGroup):
+    waiting_for_serial_number = State()
+    waiting_for_model = State()
+    waiting_for_mac_address = State()
 
 async def cmd_register_router(message: types.Message):
-    """Обработчик команды /register_router. Регистрирует новый роутер через сканирование штрихкода."""
-    if not await is_user_admin(message):
-        await message.answer("Эта команда доступна только администраторам.")
+    """Обработчик команды /register_router для начала процесса регистрации роутера."""
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="Добавить вручную", callback_data="add_router_manually")],
+        [InlineKeyboardButton(text="Сканировать", callback_data="scan_router_label")]
+    ])
+    await message.answer("Выберите способ добавления роутера:", reply_markup=keyboard)
+
+async def handle_router_image(message: types.Message, bot: Bot):
+    """Обработчик для загрузки изображения роутера."""
+    # Проверка прав администратора временно отключена
+
+    if not message.photo:
+        await message.answer("Пожалуйста, отправьте корректное изображение.")
         return
 
-    # Логика сканирования штрихкода и получения данных о роутере
-    # Например, используем message.photo для получения изображения штрихкода
-    # и потом используем внешнюю библиотеку для распознавания
+    # Получаем самый крупный вариант фото
+    photo = message.photo[-1]
 
-    router_info = extract_router_info_from_qrcode(message.photo)
-    if not router_info:
-        await message.answer("Не удалось распознать данные роутера. Пожалуйста, попробуйте снова.")
-        return
+    # Скачиваем файл фото с сервера Telegram
+    file = await bot.download_file_by_id(photo.file_id)
+    file_data = BytesIO(await file.read())  # Преобразуем файл в BytesIO
+
+    # Используем функцию scan_label для извлечения информации
+    result = await scan_label(file_data)
+
+    if result:
+        serial_number = result.get('serial_number')
+        model = result.get('model')
+
+        # Добавляем логику сохранения данных в базу
+        session = SessionLocal()
+        try:
+            new_router = Router(serial_number=serial_number, model=model)
+            session.add(new_router)
+            session.commit()
+            await message.answer(f"Роутер {model} с серийным номером {serial_number} успешно зарегистрирован.")
+        except Exception as e:
+            logging.error(f"Ошибка при регистрации роутера: {e}")
+            await message.answer("Произошла ошибка при регистрации роутера.")
+        finally:
+            session.close()
+    else:
+        await message.answer("Не удалось распознать данные. Пожалуйста, попробуйте снова.")
+
+async def handle_router_callback(callback_query: CallbackQuery, bot: Bot):
+    """Обработчик для кнопки 'Добавить роутер'."""
+    # Проверка прав администратора временно отключена
+
+    # Отправляем клавиатуру с выбором метода добавления роутера
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="Добавить вручную", callback_data="add_router_manually")],
+        [InlineKeyboardButton(text="Сканировать", callback_data="scan_router_label")]
+    ])
+    
+    await callback_query.message.answer("Выберите способ добавления роутера:", reply_markup=keyboard)
+    await callback_query.answer()
+
+async def start_router_registration(callback_query: CallbackQuery, state: FSMContext):
+    """Начало регистрации роутера: спрашиваем серийный номер."""
+    await callback_query.message.answer("Введите серийный номер роутера:")
+    await state.set_state(RouterRegistration.waiting_for_serial_number)
+    await callback_query.answer()
+
+async def process_serial_number(message: types.Message, state: FSMContext):
+    """Обработка серийного номера и запрос модели."""
+    await state.update_data(serial_number=message.text)
+    await message.answer("Введите модель роутера:")
+    await state.set_state(RouterRegistration.waiting_for_model)
+
+async def process_model(message: types.Message, state: FSMContext):
+    """Обработка модели и запрос MAC-адреса."""
+    await state.update_data(model=message.text)
+    await message.answer("Введите MAC-адрес роутера:")
+    await state.set_state(RouterRegistration.waiting_for_mac_address)
+
+async def process_mac_address(message: types.Message, state: FSMContext):
+    """Обработка MAC-адреса и завершение регистрации роутера."""
+    user_data = await state.get_data()
+    serial_number = user_data['serial_number']
+    model = user_data['model']
+    mac_address = message.text
 
     session = SessionLocal()
     try:
-        # Добавляем роутер в базу данных
-        new_router = Router(
-            serial_number=router_info['serial_number'],
-            model=router_info['model'],
-            ip_address=router_info['ip_address'],  # или другой метод определения IP
-            user_id=router_info['user_id']
-        )
+        new_router = Router(serial_number=serial_number, model=model, mac_address=mac_address)
         session.add(new_router)
         session.commit()
-
-        # Обновляем DNS-запись для роутера
-        success = update_dns(router_info['hostname'], router_info['ip_address'])
-        if success:
-            await message.answer(f"Роутер {router_info['hostname']} успешно зарегистрирован и DNS обновлен.")
-        else:
-            await message.answer("Не удалось обновить DNS для нового роутера.")
-
+        await message.answer(f"Роутер {model} с серийным номером {serial_number} и MAC-адресом {mac_address} успешно зарегистрирован.")
     except Exception as e:
         logging.error(f"Ошибка при регистрации роутера: {e}")
         await message.answer("Произошла ошибка при регистрации роутера.")
     finally:
         session.close()
+    
+    await state.clear()  # Заменяем finish() на clear()
 
 def register_handlers_admin(dp: Dispatcher):
     """Регистрация обработчиков команд для администратора."""
-    dp.message.register(cmd_add_user, Command(commands=["add_user"]))
-    dp.message.register(cmd_remove_user, Command(commands=["remove_user"]))
-    dp.message.register(cmd_register_router, Command(commands=["register_router"]))  # Регистрация нового обработчика
+    dp.message.register(cmd_register_router, Command(commands=["register_router"]))
+    dp.message.register(handle_router_image, F.content_type == types.ContentType.PHOTO)
+    dp.callback_query.register(handle_router_callback, lambda c: c.data == "add_router")
+    dp.callback_query.register(start_router_registration, lambda c: c.data == "add_router_manually")  # Убрали state="*"
+    dp.message.register(process_serial_number, RouterRegistration.waiting_for_serial_number)
+    dp.message.register(process_model, RouterRegistration.waiting_for_model)
+    dp.message.register(process_mac_address, RouterRegistration.waiting_for_mac_address)

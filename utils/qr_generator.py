@@ -1,39 +1,33 @@
-# utils/qr_generator.py
-import logging
-from sqlalchemy.orm import Session
-from db.models import VpnClient
+# utils/qr_generator.pyimport qrcode
 
-# Импортируем настройки из config.py
-import config
-
-def get_free_ip(session: Session) -> str:
+def generate_qr_code(data: str, client_id: int) -> str:
     """
-    Функция для получения следующего доступного IP-адреса в диапазоне.
+    Функция для генерации QR-кода.
 
     Args:
-        session (Session): Сессия SQLAlchemy для доступа к базе данных.
+        data (str): Данные, которые будут закодированы в QR-коде.
+        client_id (int): Идентификатор клиента, используемый для именования файла.
 
     Returns:
-        str: Свободный IP-адрес.
-
-    Raises:
-        Exception: Если нет доступных IP-адресов.
+        str: Путь к сгенерированному файлу QR-кода.
     """
-    logging.info("Starting search for a free IP address.")
+    # Создаем QR-код
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+
+    # Создаем изображение QR-кода
+    img = qr.make_image(fill='black', back_color='white')
+
+    # Генерируем путь для сохранения файла
+    qr_code_path = f"configs/qr_{client_id}.png"
     
-    # Получаем базовый IP-адрес из config.py
-    base_ip = config.BASE_IP
-
-    # Перебор IP-адресов в указанном диапазоне
-    for i in range(0, 256):
-        for j in range(1, 256):
-            ip = f"{base_ip}{i}.{j}"
-            # Проверяем, используется ли IP-адрес в базе данных
-            if not session.query(VpnClient).filter(VpnClient.address == ip).first():
-                logging.info(f"Found free IP address: {ip}")
-                return ip
-
-    # Если не найден ни один свободный IP-адрес, логируем ошибку и выбрасываем исключение
-    logging.error("No free IP addresses available in the range.")
-    raise Exception("Нет свободных IP-адресов в диапазоне.")
-
+    # Сохраняем изображение
+    img.save(qr_code_path)
+    
+    return qr_code_path

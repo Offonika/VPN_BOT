@@ -2,7 +2,7 @@
 
 from aiogram import types, Router
 from aiogram.filters import Command
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InputFile, LabeledPrice
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice, PreCheckoutQuery, InputFile
 from db.database import SessionLocal
 from db.models import User, VpnClient, Payment
 from utils.vpn_config import generate_vpn_keys, generate_vpn_config, restart_wireguard, add_client_to_wg_config
@@ -13,22 +13,29 @@ import asyncio
 import logging
 from datetime import datetime
 import config
+from aiogram import F
 
 router = Router()
 
 PROVIDER_TOKEN = '381764678:TEST:93797'  # Замените на ваш тестовый токен ЮKassa
 
+
 async def cmd_start(message: types.Message):
     """Обработчик команды /start."""
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Подключить VPN", callback_data="get_vpn_key")],
-        [InlineKeyboardButton(text="Оплатить VPN", callback_data="pay_vpn")]
+        [InlineKeyboardButton(text="Оплатить VPN", callback_data="pay_vpn")],
+        [InlineKeyboardButton(text="Добавить роутер", callback_data="add_router")]
     ])
     
-    await message.answer_photo(photo=InputFile('static/images/welcome_banner.jpg'),
-                               caption="Добро пожаловать в VPN бот! Нажмите кнопку ниже, чтобы подключиться к VPN.",
-                               reply_markup=keyboard)
+    # Удаляем код, который отправляет изображение
+    await message.answer(
+        text="Добро пожаловать в VPN бот! Нажмите кнопку ниже, чтобы подключиться к VPN.",
+        reply_markup=keyboard
+    )
 
+
+    
 async def cmd_help(message: types.Message):
     """Обработчик команды /help."""
     await message.answer("/start - Начать работу\n/help - Показать это сообщение\n/status - Проверить статус вашего VPN")
@@ -184,11 +191,11 @@ async def process_pay_command(callback_query: types.CallbackQuery):
         payload='vpn-subscription-payload'
     )
 
-@router.pre_checkout_query_handler(lambda query: True)
-async def pre_checkout_query_handler(pre_checkout_query: types.PreCheckoutQuery):
+@router.pre_checkout_query()
+async def handle_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
     await pre_checkout_query.bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
 
-@router.message_handler(content_types=types.ContentType.SUCCESSFUL_PAYMENT)
+@router.message(F.content_type == types.ContentType.SUCCESSFUL_PAYMENT)
 async def process_successful_payment(message: types.Message):
     """Обработчик успешного платежа."""
     db = SessionLocal()
@@ -209,4 +216,17 @@ async def process_successful_payment(message: types.Message):
         await message.answer('Спасибо за оплату! Ваша подписка активирована.')
     except Exception as e:
         logging.error(f"Ошибка при сохранении платежа: {e}")
-        await message.answer('Произошла ошибка при
+        await message.answer('Произошла ошибка при обработке вашего платежа. Пожалуйста, свяжитесь с поддержкой.')
+    finally:
+        db.close()
+
+def register_handlers_user(router: Router):
+    """Регистрация всех хендлеров для пользователя."""
+    router.message.register(cmd_start, Command(commands=["start"]))
+    router.message.register(cmd_help, Command(commands=["help"]))
+    router.message.register(cmd_status, Command(commands=["status"]))
+    router.callback_query.register(handle_get_vpn_key, lambda c: c.data == "get_vpn_key")
+    router.callback_query.register(handle_get_qr_code, lambda c: c.data == "get_qr_code")
+    router.callback_query.register(handle_download_config, lambda c: c.data == "download_config")
+    router.callback_query.register(handle_get_instruction, lambda c: c.data == "get_instruction")
+    router.callback_query.register(process_pay_command, lambda c: c.data == "pay_vpn")
