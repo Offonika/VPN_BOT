@@ -1,13 +1,17 @@
-# utils/vpn_config.py
-
-# utils/vpn_config.py
-
 import subprocess
 import logging
 from sqlalchemy.orm import Session
 from db.models import VpnClient
 import config  # Импортируем настройки из config.py
 import os
+from pymongo import MongoClient
+from datetime import datetime
+from db.mongodb import get_mongo_collection
+
+# Настройка логирования
+logging.basicConfig(filename='mongo_operations.log', level=logging.INFO, 
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def generate_vpn_keys():
     """
@@ -82,6 +86,7 @@ def restart_wireguard():
         logging.error(f"Failed to restart WireGuard service: {e}")
         return False
 
+
 def generate_vpn_config(client: VpnClient):
     """
     Генерирует конфигурационный файл WireGuard для нового клиента.
@@ -90,8 +95,12 @@ def generate_vpn_config(client: VpnClient):
         client (VpnClient): Объект клиента VPN.
     
     Returns:
-        str: Путь к созданному конфигурационному файлу.
+        str: Конфигурационный файл в виде строки.
     """
+    # Чтение публичного ключа сервера из конфигурационного файла
+    with open("/etc/wireguard/server_publickey", "r") as f:
+        server_public_key = f.read().strip()
+
     config_content = f"""
 [Interface]
 PrivateKey = {client.private_key}
@@ -99,46 +108,40 @@ Address = {client.address}/32
 DNS = {client.dns}
 
 [Peer]
-PublicKey = {client.public_key}
+PublicKey = {server_public_key}
+AllowedIPs = 0.0.0.0/0
 Endpoint = {client.endpoint}
-AllowedIPs = {client.allowed_ips}
-PersistentKeepalive = {client.persistent_keepalive}
+PersistentKeepalive = 25
 """
+    return config_content
 
-    config_path = os.path.join(config.CONFIG_PATH_BASE, f"{client.telegram_id}.conf")
 
-    try:
-        with open(config_path, 'w') as config_file:
-            config_file.write(config_content)
-        logging.info(f"VPN configuration file generated at {config_path}.")
-        return config_path
-    except IOError as e:
-        logging.error(f"Failed to write VPN configuration file: {e}")
-        raise Exception(f"Не удалось создать конфигурационный файл VPN: {e}")
-
-def add_client_to_wg_config(public_key: str, ip_address: str):
+def add_client_to_wg_config(client: VpnClient):
     """
     Добавляет нового клиента в конфигурационный файл WireGuard (wg0.conf).
-
+    
     Args:
-        public_key (str): Публичный ключ нового клиента.
-        ip_address (str): IP-адрес нового клиента в VPN-сети.
+        client (VpnClient): Объект клиента VPN.
     """
+    # Чтение публичного ключа клиента
+    client_public_key = client.public_key
+    
     wg_config_path = '/etc/wireguard/wg0.conf'  # Путь к конфигурационному файлу WireGuard
-
+    
     new_peer_config = f"""
-[Peer]
-PublicKey = {public_key}
-AllowedIPs = {ip_address}/32
+[Peer] # Клиент {client.id} ({client.user.username})
+PublicKey = {client_public_key}
+AllowedIPs = {client.address}/32
 """
     
     try:
         with open(wg_config_path, 'a') as wg_config_file:  # Открываем файл в режиме добавления
             wg_config_file.write(new_peer_config)
-        logging.info(f"Added new client to WireGuard config: {ip_address}")
+        logging.info(f"Added new client to WireGuard config: {client.address}")
     except IOError as e:
         logging.error(f"Failed to add new client to WireGuard config: {e}")
         raise Exception(f"Не удалось добавить нового клиента в конфигурацию WireGuard: {e}")
+
 
 def check_wireguard_status():
     """
@@ -155,3 +158,29 @@ def check_wireguard_status():
     except subprocess.CalledProcessError as e:
         logging.error(f"Failed to check WireGuard status: {e}")
         return False
+
+def save_config_to_mongodb(config_content: str, telegram_id: int):
+    collection = get_mongo_collection('vpn_configs')
+
+    # Логирование поиска документа
+    logging.info(f"Поиск существующей конфигурации для пользователя {telegram_id}")
+    existing_doc = collection.find_one({"telegram_id": telegram_id})
+    if existing_doc:
+        logging.info(f"Конфигурация для пользователя {telegram_id} уже существует в MongoDB.")
+        return existing_doc['_id']  # Возвращаем существующий ObjectId
+
+    # Логирование вставки нового документа
+    document = {
+        "telegram_id": telegram_id,
+        "config": config_content,
+        "created_at": datetime.utcnow()
+    }
+
+    try:
+        result = collection.insert_one(document)
+        logging.info(f"Конфигурация сохранена в MongoDB с ID {result.inserted_id}")
+        return result.inserted_id
+    except Exception as e:
+        logging.error(f"Ошибка при сохранении конфигурации в MongoDB для пользователя {telegram_id}: {e}")
+        raise
+

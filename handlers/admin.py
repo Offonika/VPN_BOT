@@ -26,27 +26,20 @@ async def cmd_register_router(message: types.Message):
 
 async def handle_router_image(message: types.Message, bot: Bot):
     """Обработчик для загрузки изображения роутера."""
-    # Проверка прав администратора временно отключена
-
     if not message.photo:
         await message.answer("Пожалуйста, отправьте корректное изображение.")
         return
 
-    # Получаем самый крупный вариант фото
     photo = message.photo[-1]
-
-    # Скачиваем файл фото с сервера Telegram
     file = await bot.download_file_by_id(photo.file_id)
-    file_data = BytesIO(await file.read())  # Преобразуем файл в BytesIO
+    file_data = BytesIO(await file.read())
 
-    # Используем функцию scan_label для извлечения информации
     result = await scan_label(file_data)
 
     if result:
         serial_number = result.get('serial_number')
         model = result.get('model')
 
-        # Добавляем логику сохранения данных в базу
         session = SessionLocal()
         try:
             new_router = Router(serial_number=serial_number, model=model)
@@ -63,9 +56,6 @@ async def handle_router_image(message: types.Message, bot: Bot):
 
 async def handle_router_callback(callback_query: CallbackQuery, bot: Bot):
     """Обработчик для кнопки 'Добавить роутер'."""
-    # Проверка прав администратора временно отключена
-
-    # Отправляем клавиатуру с выбором метода добавления роутера
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Добавить вручную", callback_data="add_router_manually")],
         [InlineKeyboardButton(text="Сканировать", callback_data="scan_router_label")]
@@ -97,11 +87,19 @@ async def process_mac_address(message: types.Message, state: FSMContext):
     user_data = await state.get_data()
     serial_number = user_data['serial_number']
     model = user_data['model']
-    mac_address = message.text
+    mac_address = message.text.lower().replace(':', '')  # Переводим MAC-адрес в нижний регистр и убираем двоеточия
+
+    # Сформируем уникальный subdomain
+    subdomain = f"{mac_address}@offonika.ru"
 
     session = SessionLocal()
     try:
-        new_router = Router(serial_number=serial_number, model=model, mac_address=mac_address)
+        new_router = Router(
+            serial_number=serial_number,
+            model=model,
+            mac_address=mac_address,
+            subdomain=subdomain  # Сохраняем сформированный subdomain
+        )
         session.add(new_router)
         session.commit()
         await message.answer(f"Роутер {model} с серийным номером {serial_number} и MAC-адресом {mac_address} успешно зарегистрирован.")
@@ -118,7 +116,7 @@ def register_handlers_admin(dp: Dispatcher):
     dp.message.register(cmd_register_router, Command(commands=["register_router"]))
     dp.message.register(handle_router_image, F.content_type == types.ContentType.PHOTO)
     dp.callback_query.register(handle_router_callback, lambda c: c.data == "add_router")
-    dp.callback_query.register(start_router_registration, lambda c: c.data == "add_router_manually")  # Убрали state="*"
+    dp.callback_query.register(start_router_registration, lambda c: c.data == "add_router_manually")
     dp.message.register(process_serial_number, RouterRegistration.waiting_for_serial_number)
     dp.message.register(process_model, RouterRegistration.waiting_for_model)
     dp.message.register(process_mac_address, RouterRegistration.waiting_for_mac_address)

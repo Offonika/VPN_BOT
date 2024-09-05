@@ -6,7 +6,8 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # Настройка URL базы данных из переменной окружения
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+SQLALCHEMY_DATABASE_URL = 'postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db'
+
 
 if not SQLALCHEMY_DATABASE_URL:
     raise ValueError("DATABASE_URL is not set in environment variables")

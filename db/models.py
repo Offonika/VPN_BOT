@@ -27,7 +27,7 @@ class User(Base):
 
 class VpnClient(Base):
     __tablename__ = 'vpn_clients'
-    
+
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     private_key = Column(String, nullable=False)
@@ -37,11 +37,11 @@ class VpnClient(Base):
     allowed_ips = Column(String, nullable=False)
     endpoint = Column(String, nullable=False)
     persistent_keepalive = Column(Integer)
-    config_text = Column(String)
-    config_file = Column(String)
+    config_file_id = Column(String, nullable=True)  # Добавляем это поле для хранения ID конфигурации в MongoDB
     comments = Column(String)
 
     user = relationship("User", back_populates="vpn_clients")
+
 
 class Referral(Base):
     __tablename__ = 'referrals'
@@ -58,9 +58,9 @@ class Router(Base):
     __tablename__ = 'routers'
     
     id = Column(Integer, primary_key=True, index=True)
-    serial_number = Column(String, nullable=False)
+    serial_number = Column(String, nullable=False, unique=True)
     model = Column(String, nullable=False)
-    mac_address = Column(String, nullable=False)  # Добавляем поле для MAC-адреса
+    mac_address = Column(String, nullable=False, unique=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     vpn_config = Column(String, nullable=True)
     admin_access = Column(String)
@@ -70,11 +70,10 @@ class Router(Base):
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
     comments = Column(String)
-    subdomain = Column(String, nullable=True, unique=True)  # Добавляем поддомен
-    dns_record_id = Column(String, nullable=True)  # Добавляем ID DNS-записи из Timeweb
+    subdomain = Column(String, nullable=True, unique=True)  # Поддомен
+    dns_record_id = Column(String, nullable=True)  # ID DNS-записи из Timeweb
 
     user = relationship("User", back_populates="routers")
-
 
 class Payment(Base):
     __tablename__ = 'payments'

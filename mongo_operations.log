@@ -1,0 +1,55 @@
+2024-09-05 06:37:11,127 - INFO - Starting bot...
+2024-09-05 06:37:11,129 - INFO - Start polling
+2024-09-05 06:37:11,191 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-05 06:37:46,759 - INFO - Update id=292920862 is handled. Duration 64 ms by bot id=7440031014
+2024-09-05 06:37:54,339 - INFO - Подключение к базе данных успешно установлено.
+2024-09-05 06:37:54,402 - INFO - Пользователь 356752130 не найден, создаем нового.
+2024-09-05 06:37:54,472 - INFO - Создание новой конфигурации VPN...
+2024-09-05 06:37:54,500 - INFO - VPN keys generated successfully.
+2024-09-05 06:37:54,500 - INFO - Starting search for a free IP address.
+2024-09-05 06:37:54,506 - INFO - Found free IP address: 10.20.0.2
+2024-09-05 06:37:54,507 - INFO - Получение коллекции: vpn_configs
+2024-09-05 06:37:54,508 - INFO - Поиск существующей конфигурации для пользователя 356752130
+2024-09-05 06:37:54,521 - INFO - Конфигурация сохранена в MongoDB с ID 66d927921bf0804b6631dc90
+2024-09-05 06:37:54,521 - INFO - Конфигурация сохранена в MongoDB с ID 66d927921bf0804b6631dc90
+2024-09-05 06:37:54,526 - INFO - Новая конфигурация VPN успешно создана и сохранена.
+2024-09-05 06:37:54,529 - INFO - Added new client to WireGuard config: 10.20.0.2
+2024-09-05 06:37:54,601 - INFO - Сессия базы данных закрыта.
+2024-09-05 06:37:54,630 - INFO - Update id=292920863 is handled. Duration 293 ms by bot id=7440031014
+2024-09-05 06:38:01,644 - INFO - Ищем config_file_id для пользователя 356752130
+2024-09-05 06:38:01,644 - INFO - config_file_id для пользователя 356752130: 66d927921bf0804b6631dc90
+2024-09-05 06:38:01,644 - INFO - Получение коллекции: vpn_configs
+2024-09-05 06:38:01,646 - INFO - Файл конфигурации сохранен в: /var/www/html/configs/356752130.conf
+2024-09-05 06:38:01,647 - INFO - ZIP-архив создан по адресу: /var/www/html/configs/356752130.zip
+2024-09-05 06:38:01,725 - INFO - Update id=292920864 is handled. Duration 84 ms by bot id=7440031014
+2024-09-05 06:39:14,517 - INFO - Ищем config_file_id для пользователя 356752130
+2024-09-05 06:39:14,517 - INFO - config_file_id для пользователя 356752130: 66d927921bf0804b6631dc90
+2024-09-05 06:39:14,596 - INFO - QR-код сохранен в: /var/www/html/configs/356752130_qrcode.png
+2024-09-05 06:39:14,747 - INFO - Update id=292920865 is handled. Duration 238 ms by bot id=7440031014
+2024-09-05 06:39:17,909 - INFO - Ищем config_file_id для пользователя 356752130
+2024-09-05 06:39:17,909 - INFO - config_file_id для пользователя 356752130: 66d927921bf0804b6631dc90
+2024-09-05 06:39:17,962 - INFO - QR-код сохранен в: /var/www/html/configs/356752130_qrcode.png
+2024-09-05 06:39:18,064 - INFO - Update id=292920866 is handled. Duration 158 ms by bot id=7440031014
+2024-09-05 06:39:27,444 - INFO - Update id=292920867 is handled. Duration 97 ms by bot id=7440031014
+2024-09-05 06:39:33,578 - INFO - Update id=292920868 is handled. Duration 57 ms by bot id=7440031014
+2024-09-05 06:39:37,121 - INFO - Update id=292920869 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-05 06:39:41,341 - INFO - Update id=292920870 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-05 06:39:42,809 - INFO - Update id=292920871 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-05 06:39:43,106 - INFO - Update id=292920872 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-05 06:39:43,338 - INFO - Update id=292920873 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-05 06:39:43,437 - INFO - Update id=292920874 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-05 06:57:51,824 - INFO - Update id=292920875 is handled. Duration 51 ms by bot id=7440031014
+2024-09-05 06:58:39,774 - INFO - Update id=292920876 is handled. Duration 30 ms by bot id=7440031014
+2024-09-05 07:03:20,496 - INFO - Update id=292920877 is handled. Duration 105 ms by bot id=7440031014
+2024-09-05 20:39:33,432 - INFO - Starting bot...
+2024-09-05 20:39:33,435 - INFO - Start polling
+2024-09-05 20:39:33,493 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-05 20:40:13,807 - INFO - Update id=292920880 is handled. Duration 151 ms by bot id=7440031014
+2024-09-05 20:40:31,160 - INFO - Update id=292920881 is handled. Duration 175 ms by bot id=7440031014
+2024-09-05 20:40:36,076 - INFO - Update id=292920882 is handled. Duration 88 ms by bot id=7440031014
+2024-09-05 20:41:30,709 - INFO - Update id=292920883 is handled. Duration 151 ms by bot id=7440031014
+2024-09-05 20:42:26,373 - INFO - Update id=292920884 is handled. Duration 131 ms by bot id=7440031014
+2024-09-05 20:43:55,915 - INFO - Update id=292920885 is handled. Duration 202 ms by bot id=7440031014
+2024-09-05 20:51:48,744 - WARNING - Received SIGINT signal
+2024-09-05 20:51:48,746 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-05 20:51:48,747 - INFO - Polling stopped
