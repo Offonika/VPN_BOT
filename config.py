@@ -44,7 +44,12 @@ VPN_DNS = "8.8.8.8"  # Этот параметр можно оставить ф�
 BASE_IP = "10.20."
 
 # MongoDB URI
-MONGO_URI = "mongodb://localhost:27017/vpn_bot"
+MONGO_URI = "mongodb://admin:YX91lYxAPxvlyTFGiO26h@localhost:27017/vpn_bot?authSource=admin"
+
+#YKASSA
+YKASSA_PROVIDER_TOKEN = '381764678:TEST:93797'
+YKASSA_SHOP_ID = '506751'
+YKASSA_ARTICLE_ID = '538350'
 
 # Другие настройки по умолчанию
 DEFAULT_LANGUAGE = "en"

@@ -3,6 +3,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean, Float, DateTime, Numeric
 from sqlalchemy.orm import relationship
 from .database import Base
+from datetime import datetime
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -82,10 +84,11 @@ class Payment(Base):
     user_id = Column(Integer, ForeignKey('users.id'))  # Связь с пользователем
     telegram_payment_charge_id = Column(String, unique=True, index=True)  # ID платежа Telegram
     provider_payment_charge_id = Column(String, unique=True, index=True)  # ID платежа ЮKassa
-    amount = Column(Numeric, nullable=False)  # Сумма платежа
-    currency = Column(String, nullable=False)  # Валюта платежа (например, 'RUB')
+    amount = Column(Numeric(10, 2), nullable=False)  # Сумма платежа в рублях
+    currency = Column(String, nullable=False, default='RUB')  # Валюта платежа (например, 'RUB')
     description = Column(String)  # Описание товара или услуги
-    created_at = Column(DateTime)  # Дата и время создания платежа
-    status = Column(String, default='pending')  # Статус платежа (например, 'pending', 'completed', 'failed')
+    created_at = Column(DateTime, default=datetime.utcnow)  # Дата и время создания платежа
+    updated_at = Column(DateTime, onupdate=datetime.utcnow)  # Дата и время последнего обновления платежа
+    status = Column(String, default='pending')  # Статус платежа (pending, completed, failed)
 
     user = relationship("User", back_populates="payments")  # Связь с пользователем

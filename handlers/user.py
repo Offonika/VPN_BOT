@@ -10,7 +10,7 @@ from utils.ip_manager import get_free_ip
 from utils.qr_generator import generate_qr_code
 from aiohttp import ClientConnectionError
 from aiogram.types import FSInputFile  # замените InputFile на FSInputFile
-
+from utils.vpn_config import update_vpn_client_config
 import asyncio
 import logging
 from datetime import datetime
@@ -23,6 +23,7 @@ import qrcode
 from pymongo import MongoClient
 from aiogram.types import InputFile
 import zipfile
+from config import YKASSA_PROVIDER_TOKEN
 
 router = Router()
 
@@ -31,15 +32,17 @@ PROVIDER_TOKEN = '381764678:TEST:93797'  # Замените на ваш тест
 async def cmd_start(message: types.Message):
     """Обработчик команды /start."""
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Подключить VPN", callback_data="get_vpn_key")],
-        [InlineKeyboardButton(text="Оплатить VPN", callback_data="pay_vpn")],
+        [InlineKeyboardButton(text="Подключить VPN", callback_data="choose_vpn_protocol")],
+        [InlineKeyboardButton(text="Оплатить VPN", callback_data="pay_vpn")],  # Оплата подписки
+        [InlineKeyboardButton(text="Пополнить баланс", callback_data="pay")],  # Пополнение баланса
         [InlineKeyboardButton(text="Добавить роутер", callback_data="add_router")]
     ])
     
     await message.answer(
-        text="Добро пожаловать в VPN бот! Нажмите кнопку ниже, чтобы подключиться к VPN.",
+        text="Добро пожаловать в VPN бот! Нажмите кнопку ниже, чтобы выбрать действие.",
         reply_markup=keyboard
     )
+
 
 async def cmd_help(message: types.Message):
     """Обработчик команды /help."""
@@ -48,6 +51,156 @@ async def cmd_help(message: types.Message):
 async def cmd_status(message: types.Message):
     """Обработчик команды /status."""
     await message.answer("Ваш VPN активен.")
+
+async def cmd_update_vpn_config(message: types.Message):
+    """Обработчик команды /update_vpn_config для обновления конфигурации VPN."""
+    telegram_id = message.from_user.id  # Получаем Telegram ID пользователя
+    session = SessionLocal()
+
+    try:
+        # Вызываем функцию обновления конфигурации
+        update_vpn_client_config(session, telegram_id)
+        await message.answer("Конфигурация VPN успешно обновлена.")
+    except Exception as e:
+        logging.error(f"Ошибка при обновлении конфигурации VPN: {e}")
+        await message.answer("Произошла ошибка при обновлении конфигурации VPN.")
+    finally:
+        session.close()
+
+async def cmd_download_config(message: types.Message):
+    telegram_id = message.from_user.id
+    session = SessionLocal()
+
+    try:
+        user = session.query(User).filter(User.telegram_id == telegram_id).first()
+        if not user:
+            await message.answer("Пользователь не найден. Пожалуйста, зарегистрируйтесь сначала.")
+            return
+
+        client = session.query(VpnClient).filter(VpnClient.user_id == user.id).first()
+
+        if client and client.config_file_id:
+            await handle_download_config(message)
+        else:
+            await message.answer("Не удалось найти конфигурационный файл для скачивания.")
+    except Exception as e:
+        logging.error(f"Ошибка при скачивании конфигурации: {e}")
+    finally:
+        session.close()
+
+async def cmd_get_qr_code(message: types.Message):
+    telegram_id = message.from_user.id
+    session = SessionLocal()
+
+    try:
+        user = session.query(User).filter(User.telegram_id == telegram_id).first()
+        if not user:
+            await message.answer("Пользователь не найден. Пожалуйста, зарегистрируйтесь сначала.")
+            return
+
+        client = session.query(VpnClient).filter(VpnClient.user_id == user.id).first()
+
+        if client and client.config_file_id:
+            # Вызовите handle_get_qr_code, передав сообщение как callback_query, но с правильной обработкой
+            await handle_get_qr_code_as_message(message, client)
+        else:
+            await message.answer("Не удалось найти конфигурационный файл для генерации QR-кода.")
+    except Exception as e:
+        logging.error(f"Ошибка при получении QR-кода: {e}")
+    finally:
+        session.close()
+
+@router.message(Command(commands=["balance"]))
+async def cmd_balance(message: types.Message):
+    """Команда для проверки баланса пользователя."""
+    session = SessionLocal()
+    user = session.query(User).filter(User.telegram_id == message.from_user.id).first()
+
+    if user:
+        await message.answer(f"Ваш текущий баланс: {user.balance} руб.")
+    else:
+        await message.answer("Пользователь не найден.")
+
+    session.close()
+    
+async def handle_get_qr_code_as_message(message: types.Message, client: VpnClient):
+    """Функция для генерации и отправки QR-кода в ответ на сообщение."""
+    try:
+        # Получаем конфигурационный файл
+        logging.info(f"Ищем config_file_id для пользователя {message.from_user.id}")
+        if not client.config_file_id:
+            await message.answer("Не удалось найти конфигурационный файл.")
+            return
+
+        logging.info(f"config_file_id для пользователя {message.from_user.id}: {client.config_file_id}")
+
+        # Соединение с MongoDB и получение документа конфигурации
+        client_mongo = MongoClient("mongodb://localhost:27017/")
+        db = client_mongo["vpn_bot"]
+        collection = db["vpn_configs"]
+
+        config_document = collection.find_one({"_id": ObjectId(client.config_file_id)})
+        if not config_document:
+            logging.error(f"Не удалось найти документ в MongoDB по config_file_id: {client.config_file_id}")
+            await message.answer("Не удалось найти конфигурационный файл.")
+            return
+
+        config_content = config_document["config"]
+
+        # Генерация QR-кода
+        qr_code_path = generate_qr_code(config_content, client_id=message.from_user.id)
+        logging.info(f"QR-код сохранен в: {qr_code_path}")
+
+        # Убедитесь, что файл QR-кода существует
+        if os.path.exists(qr_code_path):
+            # Отправляем QR-код в ответ на сообщение
+            qr_file = FSInputFile(qr_code_path)
+            await message.answer_photo(qr_file, caption="Вот ваш QR-код для подключения к VPN.")
+        else:
+            logging.error(f"Ошибка: QR-код {qr_code_path} не существует.")
+            await message.answer("Ошибка при создании QR-кода.")
+
+    except Exception as e:
+        logging.error(f"An error occurred while handling QR code request: {e}")
+        await message.answer("Произошла ошибка при обработке вашего запроса.")
+
+
+async def cmd_connect_vpn(message: types.Message):
+    telegram_id = message.from_user.id
+    session = SessionLocal()
+
+    try:
+        user = session.query(User).filter(User.telegram_id == telegram_id).first()
+        if not user:
+            await message.answer("Пользователь не найден. Пожалуйста, зарегистрируйтесь сначала.")
+            return
+
+        client = session.query(VpnClient).filter(VpnClient.user_id == user.id).first()
+        if client:
+            await message.answer("Вы уже подключены к VPN.")
+        else:
+            await handle_get_vpn_key(message)
+    except Exception as e:
+        logging.error(f"Ошибка при подключении к VPN: {e}")
+    finally:
+        session.close()
+
+async def process_vpn_choice(callback_query: types.CallbackQuery):
+    """Обработчик выбора VPN протокола."""
+    if callback_query.data == "choose_vpn_protocol":
+        vpn_keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="WireGuard VPN", callback_data="wg_vpn")],
+            [InlineKeyboardButton(text="OpenConnect OCserv", callback_data="ocserv_vpn")],
+            [InlineKeyboardButton(text="Shadowsocks", callback_data="ss_vpn")]
+        ])
+        await callback_query.message.answer("Выберите VPN протокол:", reply_markup=vpn_keyboard)
+    elif callback_query.data == "wg_vpn":
+        # Логика для WireGuard
+        await handle_get_vpn_key(callback_query)
+    elif callback_query.data == "ocserv_vpn":
+        await callback_query.message.answer("OpenConnect OCserv выбран. Установите OpenConnect и следуйте инструкциям.")
+    elif callback_query.data == "ss_vpn":
+        await callback_query.message.answer("Shadowsocks выбран. Установите Shadowsocks клиент и настройте подключение через предоставленный сервер.")
 
 async def handle_get_vpn_key(callback_query: types.CallbackQuery):
     telegram_id = callback_query.from_user.id
@@ -130,7 +283,6 @@ async def handle_get_vpn_key(callback_query: types.CallbackQuery):
         logging.info("Сессия базы данных закрыта.")
         await callback_query.answer()
 
-
 async def handle_get_qr_code(callback_query: types.CallbackQuery):
     """Обработчик для кнопки 'QR код'."""
     telegram_id = callback_query.from_user.id
@@ -183,7 +335,6 @@ async def handle_get_qr_code(callback_query: types.CallbackQuery):
     finally:
         session.close()
         await callback_query.answer()
-
 
 async def handle_download_config(callback_query: types.CallbackQuery):
     telegram_id = callback_query.from_user.id
@@ -275,11 +426,15 @@ async def handle_get_instruction(callback_query: types.CallbackQuery):
         "### 7. Дополнительная помощь\n\n"
         "Если у вас возникли проблемы с подключением или настройкой VPN, вы можете обратиться за помощью в службу поддержки. Подробности и контактные данные доступны через команду `/help` в нашем Telegram-боте."
     )
+
+    # Добавляем кнопку "Назад"
+    back_button = InlineKeyboardButton(text="Назад", callback_data="go_back")
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [back_button]
+    ])
     
-    await callback_query.message.answer(instruction_text)
+    await callback_query.message.answer(instruction_text, reply_markup=keyboard)
     await callback_query.answer()
-
-
 
 async def process_pay_command(callback_query: types.CallbackQuery):
     """Обработчик команды для начала оплаты."""
@@ -294,6 +449,21 @@ async def process_pay_command(callback_query: types.CallbackQuery):
         payload='vpn-subscription-payload'
     )
 
+async def process_pay_balance(callback_query: types.CallbackQuery):
+    """Обработчик для пополнения баланса."""
+    # Логика для пополнения баланса
+    prices = [LabeledPrice(label='Пополнение баланса', amount=50000)]  # Например, 500 руб.
+    
+    await callback_query.message.bot.send_invoice(
+        callback_query.from_user.id,
+        title='Пополнение баланса',
+        description='Пополните ваш баланс в VPN боте.',
+        provider_token=YKASSA_PROVIDER_TOKEN,
+        currency='RUB',
+        prices=prices,
+        payload='balance-top-up-payload'
+    )
+
 @router.pre_checkout_query()
 async def handle_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
     await pre_checkout_query.bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
@@ -304,25 +474,49 @@ async def process_successful_payment(message: types.Message):
     db = SessionLocal()
     try:
         user = db.query(User).filter(User.telegram_id == message.from_user.id).first()
-        payment = Payment(
-            user_id=user.id,
-            telegram_payment_charge_id=message.successful_payment.telegram_payment_charge_id,
-            provider_payment_charge_id=message.successful_payment.provider_payment_charge_id,
-            amount=message.successful_payment.total_amount / 100,  # Конвертация копеек в рубли
-            currency=message.successful_payment.currency,
-            description='Подписка на VPN',
-            created_at=datetime.utcnow(),
-            status='completed'
-        )
-        db.add(payment)
-        db.commit()
-        await message.answer('Спасибо за оплату! Ваша подписка активирована.')
+        
+        # Обновляем баланс пользователя
+        if user:
+            payment_amount = message.successful_payment.total_amount / 100  # Конвертируем копейки в рубли
+            user.balance += payment_amount  # Добавляем сумму платежа к балансу
+            db.commit()  # Сохраняем изменения в базе данных
+
+            # Сохраняем информацию о платеже
+            payment = Payment(
+                user_id=user.id,
+                telegram_payment_charge_id=message.successful_payment.telegram_payment_charge_id,
+                provider_payment_charge_id=message.successful_payment.provider_payment_charge_id,
+                amount=payment_amount,
+                currency=message.successful_payment.currency,
+                description='Пополнение баланса',
+                created_at=datetime.utcnow(),
+                status='completed'
+            )
+            db.add(payment)
+            db.commit()
+            await message.answer(f'Спасибо за оплату! Ваш баланс пополнен на {payment_amount} руб.')
+        else:
+            await message.answer('Пользователь не найден.')
     except Exception as e:
         logging.error(f"Ошибка при сохранении платежа: {e}")
         await message.answer('Произошла ошибка при обработке вашего платежа. Пожалуйста, свяжитесь с поддержкой.')
     finally:
         db.close()
 
+
+async def handle_go_back(callback_query: types.CallbackQuery):
+    """Обработчик для кнопки 'Назад'."""
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="Подключить VPN", callback_data="get_vpn_key")],
+        [InlineKeyboardButton(text="Оплатить VPN", callback_data="pay_vpn")],
+        [InlineKeyboardButton(text="Добавить роутер", callback_data="add_router")],
+        [InlineKeyboardButton(text="Получить инструкцию", callback_data="get_instruction")]  # Кнопка для инструкции
+    ])
+    
+    await callback_query.message.edit_text("Вы вернулись в главное меню.", reply_markup=keyboard)
+    await callback_query.answer()
+
+# Регистрация всех хендлеров
 def register_handlers_user(router: Router):
     """Регистрация всех хендлеров для пользователя."""
     router.message.register(cmd_start, Command(commands=["start"]))
@@ -331,5 +525,16 @@ def register_handlers_user(router: Router):
     router.callback_query.register(handle_get_vpn_key, lambda c: c.data == "get_vpn_key")
     router.callback_query.register(handle_get_qr_code, lambda c: c.data == "get_qr_code")
     router.callback_query.register(handle_download_config, lambda c: c.data == "download_config")
-    router.callback_query.register(handle_get_instruction, lambda c: c.data == "get_instruction")
+    router.callback_query.register(handle_get_instruction, lambda c: c.data == "get_instruction")  # Обработчик инструкции
     router.callback_query.register(process_pay_command, lambda c: c.data == "pay_vpn")
+    router.callback_query.register(handle_go_back, lambda c: c.data == "go_back")  # Регистрация 'Назад'
+    router.callback_query.register(process_vpn_choice, lambda c: c.data in ["choose_vpn_protocol", "wg_vpn", "ocserv_vpn", "ss_vpn"])
+    router.message.register(cmd_update_vpn_config, Command(commands=["update_vpn_config"])) 
+    router.message.register(cmd_download_config, Command(commands=["download_config"]))
+    router.message.register(cmd_get_qr_code, Command(commands=["get_qr_code"]))
+    router.message.register(cmd_connect_vpn, Command(commands=["connect_vpn"]))
+    router.message.register(cmd_balance, Command(commands=["balance"]))
+    router.message.register(process_pay_balance, Command(commands=["pay"]))  # Команда для пополнения баланса
+    router.callback_query.register(process_pay_balance, lambda c: c.data == "pay")
+
+    

@@ -7,6 +7,9 @@ import os
 from pymongo import MongoClient
 from datetime import datetime
 from db.mongodb import get_mongo_collection
+from db.models import User
+from utils.ip_manager import get_free_ip
+from bson.objectid import ObjectId
 
 # Настройка логирования
 logging.basicConfig(filename='mongo_operations.log', level=logging.INFO, 
@@ -16,12 +19,6 @@ logging.basicConfig(filename='mongo_operations.log', level=logging.INFO,
 def generate_vpn_keys():
     """
     Генерирует приватный и публичный ключи для нового клиента VPN.
-
-    Returns:
-        tuple: (private_key, public_key)
-
-    Raises:
-        Exception: Если не удалось сгенерировать ключи.
     """
     try:
         private_key = subprocess.run(["wg", "genkey"], stdout=subprocess.PIPE, check=True).stdout.decode().strip()
@@ -32,16 +29,10 @@ def generate_vpn_keys():
         logging.error(f"Error generating VPN keys: {e}")
         raise Exception("Не удалось сгенерировать ключи VPN.")
 
+
 def add_vpn_user(public_key: str, ip_address: str):
     """
     Добавляет нового VPN пользователя в конфигурацию WireGuard.
-    
-    Args:
-        public_key (str): Публичный ключ нового клиента.
-        ip_address (str): IP-адрес, выделенный для нового клиента.
-    
-    Returns:
-        bool: True, если команда выполнена успешно, иначе False.
     """
     try:
         command = f"wg set wg0 peer {public_key} allowed-ips {ip_address}/32"
@@ -52,15 +43,10 @@ def add_vpn_user(public_key: str, ip_address: str):
         logging.error(f"Failed to add VPN user: {e}")
         return False
 
+
 def remove_vpn_user(public_key: str):
     """
     Удаляет VPN пользователя из конфигурации WireGuard.
-    
-    Args:
-        public_key (str): Публичный ключ клиента для удаления.
-    
-    Returns:
-        bool: True, если команда выполнена успешно, иначе False.
     """
     try:
         command = f"wg set wg0 peer {public_key} remove"
@@ -71,12 +57,10 @@ def remove_vpn_user(public_key: str):
         logging.error(f"Failed to remove VPN user: {e}")
         return False
 
+
 def restart_wireguard():
     """
     Перезапускает сервис WireGuard для применения изменений.
-    
-    Returns:
-        bool: True, если сервис успешно перезапущен, иначе False.
     """
     try:
         result = subprocess.run(['systemctl', 'restart', 'wg-quick@wg0'], check=True)
@@ -90,14 +74,7 @@ def restart_wireguard():
 def generate_vpn_config(client: VpnClient):
     """
     Генерирует конфигурационный файл WireGuard для нового клиента.
-    
-    Args:
-        client (VpnClient): Объект клиента VPN.
-    
-    Returns:
-        str: Конфигурационный файл в виде строки.
     """
-    # Чтение публичного ключа сервера из конфигурационного файла
     with open("/etc/wireguard/server_publickey", "r") as f:
         server_public_key = f.read().strip()
 
@@ -118,37 +95,15 @@ PersistentKeepalive = 25
 
 def add_client_to_wg_config(client: VpnClient):
     """
-    Добавляет нового клиента в конфигурационный файл WireGuard (wg0.conf).
-    
-    Args:
-        client (VpnClient): Объект клиента VPN.
+    Добавляет или обновляет клиента в конфигурационном файле WireGuard (wg0.conf).
     """
-    # Чтение публичного ключа клиента
-    client_public_key = client.public_key
-    
-    wg_config_path = '/etc/wireguard/wg0.conf'  # Путь к конфигурационному файлу WireGuard
-    
-    new_peer_config = f"""
-[Peer] # Клиент {client.id} ({client.user.username})
-PublicKey = {client_public_key}
-AllowedIPs = {client.address}/32
-"""
-    
-    try:
-        with open(wg_config_path, 'a') as wg_config_file:  # Открываем файл в режиме добавления
-            wg_config_file.write(new_peer_config)
-        logging.info(f"Added new client to WireGuard config: {client.address}")
-    except IOError as e:
-        logging.error(f"Failed to add new client to WireGuard config: {e}")
-        raise Exception(f"Не удалось добавить нового клиента в конфигурацию WireGuard: {e}")
+    remove_vpn_user(client.public_key)
+    add_vpn_user(client.public_key, client.address)
 
 
 def check_wireguard_status():
     """
     Проверяет состояние сервера WireGuard.
-    
-    Returns:
-        bool: True, если сервер активен, иначе False.
     """
     try:
         result = subprocess.run(['systemctl', 'is-active', 'wg-quick@wg0'], stdout=subprocess.PIPE, check=True)
@@ -159,17 +114,18 @@ def check_wireguard_status():
         logging.error(f"Failed to check WireGuard status: {e}")
         return False
 
+
 def save_config_to_mongodb(config_content: str, telegram_id: int):
+    """
+    Сохраняет конфигурацию клиента VPN в MongoDB.
+    """
     collection = get_mongo_collection('vpn_configs')
 
-    # Логирование поиска документа
-    logging.info(f"Поиск существующей конфигурации для пользователя {telegram_id}")
     existing_doc = collection.find_one({"telegram_id": telegram_id})
     if existing_doc:
         logging.info(f"Конфигурация для пользователя {telegram_id} уже существует в MongoDB.")
-        return existing_doc['_id']  # Возвращаем существующий ObjectId
+        return existing_doc['_id']
 
-    # Логирование вставки нового документа
     document = {
         "telegram_id": telegram_id,
         "config": config_content,
@@ -184,3 +140,92 @@ def save_config_to_mongodb(config_content: str, telegram_id: int):
         logging.error(f"Ошибка при сохранении конфигурации в MongoDB для пользователя {telegram_id}: {e}")
         raise
 
+
+def update_vpn_client_config(session: Session, telegram_id: int):
+    """
+    Обновляет конфигурацию клиента в PostgreSQL, MongoDB и WireGuard.
+    """
+    try:
+        # Получаем клиента из PostgreSQL по Telegram ID
+        client = session.query(VpnClient).join(User).filter(User.telegram_id == telegram_id).first()
+        if not client:
+            logging.error(f"Клиент с Telegram ID {telegram_id} не найден в PostgreSQL.")
+            return
+
+        # Проверяем наличие клиента в WireGuard
+        client_in_wg = get_client_info_from_wg(client.public_key)
+        if not client_in_wg:
+            logging.info(f"Клиент {client.public_key} не найден в WireGuard. Создаем запись.")
+            private_key, public_key = generate_vpn_keys()
+            ip_address = get_free_ip(session)
+            client.private_key = private_key
+            client.public_key = public_key
+            client.address = ip_address
+            session.commit()
+        else:
+            logging.info(f"Клиент найден в WireGuard с IP {client_in_wg['ip_address']}.")
+            client.address = client_in_wg['ip_address']
+            session.commit()
+
+        config_content = generate_vpn_config(client)
+
+        # Сохраняем новую конфигурацию в MongoDB
+        config_file_id = save_config_to_mongodb(config_content, telegram_id)
+        client.config_file_id = str(config_file_id)  # Обновляем config_file_id в PostgreSQL
+        session.commit()  # Сохраняем изменения в PostgreSQL
+
+        add_client_to_wg_config(client)
+        logging.info(f"Конфигурация для клиента с Telegram ID {telegram_id} обновлена.")
+
+    except Exception as e:
+        logging.error(f"Ошибка при обновлении конфигурации клиента: {e}")
+
+
+
+
+def update_config_in_mongodb(client, config_content):
+    """
+    Обновление конфигурации клиента в MongoDB.
+    """
+    collection = get_mongo_collection('vpn_configs')
+    
+    if client.config_file_id:
+        existing_doc = collection.find_one({"_id": ObjectId(client.config_file_id)})
+        if existing_doc:
+            collection.update_one(
+                {"_id": ObjectId(client.config_file_id)},
+                {"$set": {"config": config_content, "updated_at": datetime.utcnow()}}
+            )
+        else:
+            result = collection.insert_one({
+                "telegram_id": client.user.telegram_id,
+                "config": config_content,
+                "created_at": datetime.utcnow()
+            })
+            client.config_file_id = str(result.inserted_id)
+    else:
+        result = collection.insert_one({
+            "telegram_id": client.user.telegram_id,
+            "config": config_content,
+            "created_at": datetime.utcnow()
+        })
+        client.config_file_id = str(result.inserted_id)
+
+
+def get_client_info_from_wg(public_key: str):
+    """
+    Получает информацию о клиенте из WireGuard.
+    """
+    try:
+        result = subprocess.run(['wg', 'show', 'wg0', 'allowed-ips'], stdout=subprocess.PIPE)
+        output = result.stdout.decode().strip()
+
+        for line in output.splitlines():
+            if public_key in line:
+                parts = line.split()
+                if len(parts) >= 3:
+                    return {"public_key": public_key, "ip_address": parts[1]}
+        return None
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Ошибка при получении информации о клиенте из WireGuard: {e}")
+        return None

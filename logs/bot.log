@@ -1,0 +1,821 @@
+2024-09-07 06:52:20,210 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-07 06:52:20,210 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-07 06:52:20,220 - INFO - VPN_BOT - Starting bot...
+2024-09-07 06:52:20,223 - INFO - aiogram.dispatcher - Start polling
+2024-09-07 06:52:20,276 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 06:52:37,344 - INFO - aiogram.event - Update id=292920910 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-10 17:03:50,005 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-10 17:03:50,006 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-10 17:03:50,015 - INFO - VPN_BOT - Starting bot...
+2024-09-10 17:03:50,017 - INFO - aiogram.dispatcher - Start polling
+2024-09-10 17:03:50,071 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-10 17:04:03,401 - INFO - aiogram.event - Update id=292920911 is handled. Duration 456 ms by bot id=7440031014
+2024-09-10 17:04:20,779 - INFO - aiogram.event - Update id=292920912 is handled. Duration 125 ms by bot id=7440031014
+2024-09-10 17:04:23,632 - INFO - aiogram.event - Update id=292920913 is handled. Duration 46 ms by bot id=7440031014
+2024-09-10 17:04:28,097 - INFO - aiogram.event - Update id=292920914 is handled. Duration 82 ms by bot id=7440031014
+2024-09-10 19:25:29,768 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-10 19:25:29,771 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-10 19:25:29,772 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-10 19:25:53,494 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-10 19:25:53,495 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-10 19:25:53,505 - INFO - VPN_BOT - Starting bot...
+2024-09-10 19:25:53,507 - INFO - aiogram.dispatcher - Start polling
+2024-09-10 19:25:53,563 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-10 19:26:27,092 - INFO - aiogram.event - Update id=292920915 is handled. Duration 137 ms by bot id=7440031014
+2024-09-10 19:26:28,995 - INFO - aiogram.event - Update id=292920916 is handled. Duration 70 ms by bot id=7440031014
+2024-09-10 19:26:33,690 - INFO - aiogram.event - Update id=292920917 is handled. Duration 120 ms by bot id=7440031014
+2024-09-10 19:26:36,271 - INFO - root - Подключение к базе данных успешно установлено.
+2024-09-10 19:26:36,374 - INFO - root - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-10 19:26:36,375 - INFO - root - Конфигурация уже существует.
+2024-09-10 19:26:36,762 - INFO - root - Сессия базы данных закрыта.
+2024-09-10 19:26:36,948 - INFO - aiogram.event - Update id=292920918 is handled. Duration 678 ms by bot id=7440031014
+2024-09-10 19:26:41,733 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-10 19:26:41,734 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-10 19:26:41,749 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-10 19:26:41,862 - INFO - aiogram.event - Update id=292920919 is handled. Duration 132 ms by bot id=7440031014
+2024-09-10 19:26:45,982 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-10 19:26:45,983 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-10 19:26:45,983 - INFO - root - Получение коллекции: vpn_configs
+2024-09-10 19:26:45,986 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-10 19:26:46,047 - INFO - aiogram.event - Update id=292920920 is handled. Duration 69 ms by bot id=7440031014
+2024-09-10 19:28:11,098 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-10 19:28:11,099 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-10 19:28:11,099 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 04:00:30,866 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 04:00:30,867 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 04:00:30,879 - INFO - VPN_BOT - Starting bot...
+2024-09-11 04:00:30,882 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 04:00:30,934 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:00:36,644 - INFO - aiogram.event - Update id=292920921 is handled. Duration 58 ms by bot id=7440031014
+2024-09-11 04:02:51,130 - INFO - aiogram.event - Update id=292920922 is not handled. Duration 2 ms by bot id=7440031014
+2024-09-11 04:18:04,764 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 04:18:04,766 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:18:04,767 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 04:18:24,404 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 04:18:24,404 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 04:18:24,412 - INFO - VPN_BOT - Starting bot...
+2024-09-11 04:18:24,414 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 04:18:24,471 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:19:25,684 - INFO - aiogram.event - Update id=292920923 is handled. Duration 70 ms by bot id=7440031014
+2024-09-11 04:19:47,952 - INFO - aiogram.event - Update id=292920924 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-11 04:20:12,943 - INFO - aiogram.event - Update id=292920925 is handled. Duration 77 ms by bot id=7440031014
+2024-09-11 04:21:10,775 - INFO - aiogram.event - Update id=292920926 is handled. Duration 59 ms by bot id=7440031014
+2024-09-11 04:21:14,172 - INFO - root - Подключение к базе данных успешно установлено.
+2024-09-11 04:21:14,237 - INFO - root - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-11 04:21:14,237 - INFO - root - Конфигурация уже существует.
+2024-09-11 04:21:14,282 - INFO - root - Сессия базы данных закрыта.
+2024-09-11 04:21:14,307 - INFO - aiogram.event - Update id=292920927 is handled. Duration 136 ms by bot id=7440031014
+2024-09-11 04:21:20,894 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:21:20,895 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:21:20,895 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 04:21:20,919 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-11 04:21:21,011 - INFO - aiogram.event - Update id=292920928 is handled. Duration 119 ms by bot id=7440031014
+2024-09-11 04:30:45,073 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 04:30:45,075 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:30:45,075 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 04:31:04,613 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 04:31:04,613 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 04:31:04,620 - INFO - VPN_BOT - Starting bot...
+2024-09-11 04:31:04,622 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 04:31:04,675 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:31:17,370 - INFO - root - Подключение к базе данных успешно установлено.
+2024-09-11 04:31:17,404 - INFO - root - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-11 04:31:17,405 - INFO - root - Конфигурация уже существует.
+2024-09-11 04:31:17,474 - INFO - root - Сессия базы данных закрыта.
+2024-09-11 04:31:17,492 - INFO - aiogram.event - Update id=292920929 is handled. Duration 123 ms by bot id=7440031014
+2024-09-11 04:32:30,728 - ERROR - root - Ошибка при обновлении конфигурации клиента: module 'config' has no attribute 'User'
+2024-09-11 04:32:30,800 - INFO - aiogram.event - Update id=292920930 is handled. Duration 76 ms by bot id=7440031014
+2024-09-11 04:32:36,190 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:32:36,190 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:32:36,205 - ERROR - root - An error occurred while handling QR code request: command find requires authentication, full error: {'ok': 0.0, 'errmsg': 'command find requires authentication', 'code': 13, 'codeName': 'Unauthorized'}
+2024-09-11 04:32:36,275 - INFO - aiogram.event - Update id=292920931 is handled. Duration 91 ms by bot id=7440031014
+2024-09-11 04:32:43,900 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:32:43,901 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:32:43,901 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 04:32:43,909 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-11 04:32:43,982 - INFO - aiogram.event - Update id=292920932 is handled. Duration 85 ms by bot id=7440031014
+2024-09-11 04:33:10,897 - ERROR - root - Ошибка при обновлении конфигурации клиента: module 'config' has no attribute 'User'
+2024-09-11 04:33:11,034 - INFO - aiogram.event - Update id=292920933 is handled. Duration 138 ms by bot id=7440031014
+2024-09-11 04:39:28,769 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:39:28,770 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:39:28,770 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 04:39:28,771 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-11 04:39:28,862 - INFO - aiogram.event - Update id=292920934 is handled. Duration 98 ms by bot id=7440031014
+2024-09-11 04:40:23,573 - ERROR - root - Ошибка при обновлении конфигурации клиента: module 'config' has no attribute 'User'
+2024-09-11 04:40:23,663 - INFO - aiogram.event - Update id=292920935 is handled. Duration 92 ms by bot id=7440031014
+2024-09-11 04:44:01,547 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 04:44:01,548 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:44:01,548 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 04:44:30,996 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 04:44:30,996 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 04:44:31,004 - INFO - VPN_BOT - Starting bot...
+2024-09-11 04:44:31,006 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 04:44:31,056 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:44:40,586 - INFO - root - Клиент BOSpqUjqfR8wp4Th+EbpPO7RNgpH2vxhIipD9cdSsGE= не найден в WireGuard. Создаем запись.
+2024-09-11 04:44:40,602 - INFO - root - VPN keys generated successfully.
+2024-09-11 04:44:40,602 - ERROR - root - Ошибка при обновлении конфигурации клиента: name 'get_free_ip' is not defined
+2024-09-11 04:44:40,652 - INFO - aiogram.event - Update id=292920936 is handled. Duration 112 ms by bot id=7440031014
+2024-09-11 04:44:58,010 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:44:58,011 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:44:58,017 - ERROR - root - An error occurred while handling QR code request: command find requires authentication, full error: {'ok': 0.0, 'errmsg': 'command find requires authentication', 'code': 13, 'codeName': 'Unauthorized'}
+2024-09-11 04:44:58,097 - INFO - aiogram.event - Update id=292920937 is handled. Duration 94 ms by bot id=7440031014
+2024-09-11 04:49:45,405 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 04:49:45,406 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:49:45,407 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 04:50:05,146 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 04:50:05,147 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 04:50:05,155 - INFO - VPN_BOT - Starting bot...
+2024-09-11 04:50:05,157 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 04:50:05,206 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:50:16,729 - INFO - aiogram.event - Update id=292920938 is handled. Duration 47 ms by bot id=7440031014
+2024-09-11 04:50:32,510 - INFO - root - Клиент BOSpqUjqfR8wp4Th+EbpPO7RNgpH2vxhIipD9cdSsGE= не найден в WireGuard. Создаем запись.
+2024-09-11 04:50:32,532 - INFO - root - VPN keys generated successfully.
+2024-09-11 04:50:32,533 - INFO - root - Starting search for a free IP address.
+2024-09-11 04:50:32,542 - INFO - root - Found free IP address: 10.20.0.3
+2024-09-11 04:50:32,552 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 04:50:32,552 - ERROR - root - Ошибка при обновлении конфигурации клиента: name 'ObjectId' is not defined
+2024-09-11 04:50:32,626 - INFO - aiogram.event - Update id=292920939 is handled. Duration 162 ms by bot id=7440031014
+2024-09-11 04:52:48,756 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 04:52:48,757 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:52:48,758 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 04:53:02,816 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 04:53:02,816 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 04:53:02,823 - INFO - VPN_BOT - Starting bot...
+2024-09-11 04:53:02,825 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 04:53:02,874 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:53:11,459 - INFO - root - Клиент 4F9Xv3FBwZcpby0MOL57MYkjXrJZDTrwHnKzlUb5qV8= не найден в WireGuard. Создаем запись.
+2024-09-11 04:53:11,477 - INFO - root - VPN keys generated successfully.
+2024-09-11 04:53:11,478 - INFO - root - Starting search for a free IP address.
+2024-09-11 04:53:11,481 - INFO - root - Found free IP address: 10.20.0.1
+2024-09-11 04:53:11,488 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 04:53:11,524 - INFO - root - VPN user removed with public key: eiS0LaL//8JD8lWRKXYXXnsfk05oVOUZQrgssS9w1DQ=.
+2024-09-11 04:53:11,536 - INFO - root - VPN user added with public key: eiS0LaL//8JD8lWRKXYXXnsfk05oVOUZQrgssS9w1DQ= and IP: 10.20.0.1.
+2024-09-11 04:53:11,536 - INFO - root - Конфигурация для клиента с Telegram ID 448794918 обновлена.
+2024-09-11 04:53:11,612 - INFO - aiogram.event - Update id=292920940 is handled. Duration 195 ms by bot id=7440031014
+2024-09-11 04:53:22,716 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:53:22,716 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:53:22,725 - ERROR - root - An error occurred while handling QR code request: command find requires authentication, full error: {'ok': 0.0, 'errmsg': 'command find requires authentication', 'code': 13, 'codeName': 'Unauthorized'}
+2024-09-11 04:53:22,761 - INFO - aiogram.event - Update id=292920941 is handled. Duration 50 ms by bot id=7440031014
+2024-09-11 04:53:31,049 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 04:53:31,049 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 04:53:31,050 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 04:53:31,051 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-11 04:53:31,089 - INFO - aiogram.event - Update id=292920942 is handled. Duration 44 ms by bot id=7440031014
+2024-09-11 04:55:33,926 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 04:55:33,928 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 04:55:33,928 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 07:52:16,625 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 07:52:16,626 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 07:52:16,636 - INFO - VPN_BOT - Starting bot...
+2024-09-11 07:52:16,638 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 07:52:16,692 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 07:52:39,157 - INFO - root - Клиент eiS0LaL//8JD8lWRKXYXXnsfk05oVOUZQrgssS9w1DQ= не найден в WireGuard. Создаем запись.
+2024-09-11 07:52:39,181 - INFO - root - VPN keys generated successfully.
+2024-09-11 07:52:39,181 - INFO - root - Starting search for a free IP address.
+2024-09-11 07:52:39,189 - INFO - root - Found free IP address: 10.20.0.3
+2024-09-11 07:52:39,198 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 07:52:39,226 - INFO - root - VPN user removed with public key: t1ZGXLWB8o3VVkq0O1RkFoc0PMC/LiLTDm5L455GlA0=.
+2024-09-11 07:52:39,241 - INFO - root - VPN user added with public key: t1ZGXLWB8o3VVkq0O1RkFoc0PMC/LiLTDm5L455GlA0= and IP: 10.20.0.3.
+2024-09-11 07:52:39,241 - INFO - root - Конфигурация для клиента с Telegram ID 448794918 обновлена.
+2024-09-11 07:52:39,432 - INFO - aiogram.event - Update id=292920943 is handled. Duration 348 ms by bot id=7440031014
+2024-09-11 07:52:56,027 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 07:52:56,027 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 07:52:56,046 - ERROR - root - An error occurred while handling QR code request: command find requires authentication, full error: {'ok': 0.0, 'errmsg': 'command find requires authentication', 'code': 13, 'codeName': 'Unauthorized'}
+2024-09-11 07:52:56,149 - INFO - aiogram.event - Update id=292920944 is handled. Duration 129 ms by bot id=7440031014
+2024-09-11 07:56:06,759 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 07:56:06,760 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 07:56:06,760 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 07:59:58,099 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 07:59:58,100 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 07:59:58,110 - INFO - VPN_BOT - Starting bot...
+2024-09-11 07:59:58,113 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 07:59:58,158 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:00:19,707 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 08:00:19,708 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 08:00:19,715 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-11 08:00:19,799 - INFO - aiogram.event - Update id=292920945 is handled. Duration 130 ms by bot id=7440031014
+2024-09-11 08:14:18,926 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 08:14:18,929 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:14:18,929 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 08:14:43,340 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 08:14:43,340 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 08:14:43,349 - INFO - VPN_BOT - Starting bot...
+2024-09-11 08:14:43,351 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 08:14:43,406 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:14:47,665 - INFO - root - Клиент t1ZGXLWB8o3VVkq0O1RkFoc0PMC/LiLTDm5L455GlA0= не найден в WireGuard. Создаем запись.
+2024-09-11 08:14:47,683 - INFO - root - VPN keys generated successfully.
+2024-09-11 08:14:47,683 - INFO - root - Starting search for a free IP address.
+2024-09-11 08:14:47,687 - INFO - root - Found free IP address: 10.20.0.1
+2024-09-11 08:14:47,691 - INFO - root - Изменения для клиента с Telegram ID 448794918 успешно сохранены в PostgreSQL.
+2024-09-11 08:14:47,694 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 08:14:47,721 - INFO - root - VPN user removed with public key: ZCdtQ34t4qJ+12rAisy3rsSof+PPqyxlqdDXeU2A2Tg=.
+2024-09-11 08:14:47,731 - INFO - root - VPN user added with public key: ZCdtQ34t4qJ+12rAisy3rsSof+PPqyxlqdDXeU2A2Tg= and IP: 10.20.0.1.
+2024-09-11 08:14:47,731 - INFO - root - Конфигурация для клиента с Telegram ID 448794918 обновлена.
+2024-09-11 08:14:47,789 - INFO - aiogram.event - Update id=292920946 is handled. Duration 168 ms by bot id=7440031014
+2024-09-11 08:14:56,245 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 08:14:56,245 - INFO - root - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-11 08:14:56,252 - ERROR - root - Не удалось найти документ в MongoDB по config_file_id: 66db50d21343b4c305483630
+2024-09-11 08:14:56,500 - INFO - aiogram.event - Update id=292920947 is handled. Duration 260 ms by bot id=7440031014
+2024-09-11 08:19:52,567 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 08:19:52,569 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:19:52,570 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 08:21:05,850 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 08:21:05,850 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 08:21:05,858 - INFO - VPN_BOT - Starting bot...
+2024-09-11 08:21:05,860 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 08:21:05,902 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:21:14,821 - INFO - aiogram.event - Update id=292920948 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-11 08:21:36,025 - INFO - root - Клиент ZCdtQ34t4qJ+12rAisy3rsSof+PPqyxlqdDXeU2A2Tg= не найден в WireGuard. Создаем запись.
+2024-09-11 08:21:36,046 - INFO - root - VPN keys generated successfully.
+2024-09-11 08:21:36,047 - INFO - root - Starting search for a free IP address.
+2024-09-11 08:21:36,053 - INFO - root - Found free IP address: 10.20.0.3
+2024-09-11 08:21:36,061 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 08:21:36,072 - INFO - root - Конфигурация для пользователя 448794918 уже существует в MongoDB.
+2024-09-11 08:21:36,087 - INFO - root - VPN user removed with public key: cz4dStKfhkQu+jIZ4x9lxbmRUYRi7FbyxL+eVm4Xj0w=.
+2024-09-11 08:21:36,099 - INFO - root - VPN user added with public key: cz4dStKfhkQu+jIZ4x9lxbmRUYRi7FbyxL+eVm4Xj0w= and IP: 10.20.0.3.
+2024-09-11 08:21:36,099 - INFO - root - Конфигурация для клиента с Telegram ID 448794918 обновлена.
+2024-09-11 08:21:36,151 - INFO - aiogram.event - Update id=292920949 is handled. Duration 172 ms by bot id=7440031014
+2024-09-11 08:22:02,749 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 08:22:02,750 - INFO - root - config_file_id для пользователя 448794918: 66e0f80735bb2d4b4cc47d7c
+2024-09-11 08:22:02,817 - INFO - root - QR-код сохранен в: /var/www/html/configs/448794918_qrcode.png
+2024-09-11 08:22:03,185 - INFO - aiogram.event - Update id=292920950 is handled. Duration 443 ms by bot id=7440031014
+2024-09-11 08:22:20,306 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 08:22:20,307 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:22:20,307 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 08:32:23,792 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 08:32:23,793 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 08:32:23,801 - INFO - VPN_BOT - Starting bot...
+2024-09-11 08:32:23,803 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 08:32:23,842 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:32:23,919 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 08:32:23,919 - INFO - root - config_file_id для пользователя 448794918: 66e0f80735bb2d4b4cc47d7c
+2024-09-11 08:32:23,920 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 08:32:23,929 - INFO - root - Файл конфигурации сохранен в: /var/www/html/configs/448794918.conf
+2024-09-11 08:32:23,929 - INFO - root - ZIP-архив создан по адресу: /var/www/html/configs/448794918.zip
+2024-09-11 08:32:23,932 - INFO - root - Подключение к базе данных успешно установлено.
+2024-09-11 08:32:23,943 - INFO - root - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-11 08:32:23,943 - INFO - root - Конфигурация уже существует.
+2024-09-11 08:32:24,088 - INFO - aiogram.event - Update id=292920952 is not handled. Duration 207 ms by bot id=7440031014
+2024-09-11 08:32:24,088 - ERROR - aiogram.event - Cause exception while process update id=292920952 by bot id=7440031014
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 281, in handle_download_config
+    await callback_query.answer()
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/bot.py", line 488, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/session/aiohttp.py", line 189, in make_request
+    response = self.check_response(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+2024-09-11 08:32:24,108 - INFO - root - Сессия базы данных закрыта.
+2024-09-11 08:32:24,185 - INFO - aiogram.event - Update id=292920951 is not handled. Duration 305 ms by bot id=7440031014
+2024-09-11 08:32:24,185 - ERROR - aiogram.event - Cause exception while process update id=292920951 by bot id=7440031014
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 79, in process_vpn_choice
+    await handle_get_vpn_key(callback_query)  # Используем существующую логику для WireGuard
+  File "/opt/VPN_BOT/handlers/user.py", line 164, in handle_get_vpn_key
+    await callback_query.answer()
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/bot.py", line 488, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/session/aiohttp.py", line 189, in make_request
+    response = self.check_response(
+  File "/opt/VPN_BOT/venv/lib/python3.8/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+2024-09-11 08:32:30,081 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 08:32:30,081 - INFO - root - config_file_id для пользователя 448794918: 66e0f80735bb2d4b4cc47d7c
+2024-09-11 08:32:30,081 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 08:32:30,083 - INFO - root - Файл конфигурации сохранен в: /var/www/html/configs/448794918.conf
+2024-09-11 08:32:30,083 - INFO - root - ZIP-архив создан по адресу: /var/www/html/configs/448794918.zip
+2024-09-11 08:32:30,282 - INFO - aiogram.event - Update id=292920953 is handled. Duration 205 ms by bot id=7440031014
+2024-09-11 08:32:40,792 - INFO - aiogram.event - Update id=292920954 is handled. Duration 37 ms by bot id=7440031014
+2024-09-11 08:33:15,023 - INFO - aiogram.event - Update id=292920955 is handled. Duration 93 ms by bot id=7440031014
+2024-09-11 08:34:07,505 - INFO - aiogram.event - Update id=292920956 is handled. Duration 75 ms by bot id=7440031014
+2024-09-11 08:46:51,704 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 08:46:51,706 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 08:46:51,707 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 08:51:57,723 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 08:51:57,724 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 08:51:57,732 - INFO - VPN_BOT - Starting bot...
+2024-09-11 08:55:37,358 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 08:55:37,359 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 08:55:37,367 - INFO - VPN_BOT - Starting bot...
+2024-09-11 11:29:43,446 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 11:29:43,447 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 11:29:43,456 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:08:28,936 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:08:28,937 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:08:28,949 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:09:43,821 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:09:43,821 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:09:43,830 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:21:20,834 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:21:20,834 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:21:20,842 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:23:09,927 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:23:09,928 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:23:09,936 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:24:24,301 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:24:24,302 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:24:24,311 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:45:37,096 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:45:37,096 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:45:37,105 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:48:05,283 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:48:05,284 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:48:05,291 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:49:36,298 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:49:36,298 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:49:36,305 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:52:55,979 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:52:55,979 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:52:55,987 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:55:27,479 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 12:55:27,479 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 12:55:27,488 - INFO - VPN_BOT - Starting bot...
+2024-09-11 12:55:27,490 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 12:55:27,545 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 12:59:11,049 - INFO - aiogram.event - Update id=292920957 is handled. Duration 90 ms by bot id=7440031014
+2024-09-11 12:59:16,942 - INFO - aiogram.event - Update id=292920958 is handled. Duration 37 ms by bot id=7440031014
+2024-09-11 12:59:25,993 - INFO - root - Подключение к базе данных успешно установлено.
+2024-09-11 12:59:26,033 - INFO - root - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-11 12:59:26,033 - INFO - root - Конфигурация уже существует.
+2024-09-11 12:59:26,141 - INFO - root - Сессия базы данных закрыта.
+2024-09-11 12:59:26,175 - INFO - aiogram.event - Update id=292920959 is handled. Duration 183 ms by bot id=7440031014
+2024-09-11 13:02:41,077 - INFO - aiogram.event - Update id=292920960 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-11 13:07:32,740 - INFO - aiogram.event - Update id=292920961 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-11 13:07:39,115 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 13:07:39,115 - INFO - root - config_file_id для пользователя 448794918: 66e0f80735bb2d4b4cc47d7c
+2024-09-11 13:07:39,175 - INFO - root - QR-код сохранен в: /var/www/html/configs/448794918_qrcode.png
+2024-09-11 13:07:39,565 - INFO - aiogram.event - Update id=292920962 is handled. Duration 458 ms by bot id=7440031014
+2024-09-11 13:08:01,379 - INFO - aiogram.event - Update id=292920963 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-11 13:08:10,743 - INFO - aiogram.event - Update id=292920964 is handled. Duration 107 ms by bot id=7440031014
+2024-09-11 13:08:17,851 - INFO - aiogram.event - Update id=292920965 is handled. Duration 82 ms by bot id=7440031014
+2024-09-11 13:08:25,952 - INFO - root - Ищем config_file_id для пользователя 448794918
+2024-09-11 13:08:25,952 - INFO - root - config_file_id для пользователя 448794918: 66e0f80735bb2d4b4cc47d7c
+2024-09-11 13:08:25,952 - INFO - root - Получение коллекции: vpn_configs
+2024-09-11 13:08:25,962 - INFO - root - Файл конфигурации сохранен в: /var/www/html/configs/448794918.conf
+2024-09-11 13:08:25,963 - INFO - root - ZIP-архив создан по адресу: /var/www/html/configs/448794918.zip
+2024-09-11 13:08:25,963 - ERROR - root - An error occurred while handling configuration download request: 'Message' object has no attribute 'message'
+2024-09-11 13:08:25,963 - ERROR - root - Ошибка при скачивании конфигурации: answer() missing 1 required positional argument: 'text'
+2024-09-11 13:08:25,964 - INFO - aiogram.event - Update id=292920966 is handled. Duration 25 ms by bot id=7440031014
+2024-09-11 13:15:58,157 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-11 13:15:58,159 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 13:15:58,159 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-11 13:16:17,149 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-11 13:16:17,149 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-11 13:16:17,157 - INFO - VPN_BOT - Starting bot...
+2024-09-11 13:16:17,159 - INFO - aiogram.dispatcher - Start polling
+2024-09-11 13:16:17,209 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-11 13:16:30,832 - INFO - aiogram.event - Update id=292920967 is handled. Duration 56 ms by bot id=7440031014
+2024-09-11 13:16:35,144 - INFO - aiogram.event - Update id=292920968 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-11 13:20:31,285 - INFO - aiogram.event - Update id=292920969 is handled. Duration 53 ms by bot id=7440031014
+2024-09-12 21:45:41,922 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-12 21:45:41,923 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-12 21:45:41,930 - INFO - VPN_BOT - Starting bot...
+2024-09-12 22:02:44,201 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-12 22:02:44,202 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-12 22:02:44,209 - INFO - VPN_BOT - Starting bot...
+2024-09-12 22:04:16,631 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-12 22:04:16,632 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-12 22:04:16,640 - INFO - VPN_BOT - Starting bot...
+2024-09-12 22:05:51,938 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-12 22:05:51,939 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-12 22:05:51,947 - INFO - VPN_BOT - Starting bot...
+2024-09-12 22:05:51,949 - INFO - aiogram.dispatcher - Start polling
+2024-09-12 22:05:51,994 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-12 22:38:03,123 - INFO - aiogram.event - Update id=292920971 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-12 22:38:23,434 - INFO - aiogram.event - Update id=292920972 is handled. Duration 94 ms by bot id=7440031014
+2024-09-12 22:38:25,880 - INFO - aiogram.event - Update id=292920973 is handled. Duration 51 ms by bot id=7440031014
+2024-09-12 22:41:08,080 - INFO - aiogram.event - Update id=292920974 is handled. Duration 51 ms by bot id=7440031014
+2024-09-12 22:41:10,111 - ERROR - root - Ошибка при сохранении платежа: (psycopg2.errors.UndefinedColumn) column "updated_at" of relation "payments" does not exist
+LINE 1: ...ge_id, amount, currency, description, created_at, updated_at...
+                                                             ^
+
+[SQL: INSERT INTO payments (user_id, telegram_payment_charge_id, provider_payment_charge_id, amount, currency, description, created_at, updated_at, status) VALUES (%(user_id)s, %(telegram_payment_charge_id)s, %(provider_payment_charge_id)s, %(amount)s, %(currency)s, %(description)s, %(created_at)s, %(updated_at)s, %(status)s) RETURNING payments.id]
+[parameters: {'user_id': 3, 'telegram_payment_charge_id': '7440031014_448794918_28162_7413843488176703488', 'provider_payment_charge_id': '2e755794-000f-5000-8000-1ee10ff7b599', 'amount': 500.0, 'currency': 'RUB', 'description': 'Подписка на VPN', 'created_at': datetime.datetime(2024, 9, 12, 19, 41, 10, 105853), 'updated_at': None, 'status': 'completed'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-09-12 22:41:10,184 - INFO - aiogram.event - Update id=292920975 is handled. Duration 139 ms by bot id=7440031014
+2024-09-12 23:00:28,788 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-12 23:00:28,789 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-12 23:00:28,789 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-12 23:03:27,134 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-12 23:03:27,135 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-12 23:03:27,144 - INFO - VPN_BOT - Starting bot...
+2024-09-12 23:03:27,146 - INFO - aiogram.dispatcher - Start polling
+2024-09-12 23:03:27,208 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-12 23:03:43,961 - INFO - aiogram.event - Update id=292920976 is handled. Duration 139 ms by bot id=7440031014
+2024-09-12 23:04:48,797 - INFO - aiogram.event - Update id=292920977 is handled. Duration 68 ms by bot id=7440031014
+2024-09-12 23:04:50,764 - INFO - aiogram.event - Update id=292920978 is handled. Duration 121 ms by bot id=7440031014
+2024-09-12 23:08:55,958 - INFO - aiogram.event - Update id=292920979 is handled. Duration 45 ms by bot id=7440031014
+2024-09-12 23:12:38,364 - INFO - aiogram.event - Update id=292920980 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-12 23:13:27,483 - INFO - aiogram.event - Update id=292920981 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-12 23:52:47,586 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-12 23:52:47,587 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-12 23:52:47,587 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-12 23:53:18,008 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-12 23:53:18,008 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-12 23:53:18,016 - INFO - VPN_BOT - Starting bot...
+2024-09-12 23:53:18,019 - INFO - aiogram.dispatcher - Start polling
+2024-09-12 23:53:18,074 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-12 23:53:33,322 - INFO - aiogram.event - Update id=292920982 is handled. Duration 94 ms by bot id=7440031014
+2024-09-12 23:53:38,494 - INFO - aiogram.event - Update id=292920983 is not handled. Duration 2 ms by bot id=7440031014
+2024-09-12 23:53:46,308 - INFO - aiogram.event - Update id=292920984 is not handled. Duration 2 ms by bot id=7440031014
+2024-09-12 23:53:53,220 - INFO - aiogram.event - Update id=292920985 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-12 23:54:55,349 - INFO - aiogram.event - Update id=292920986 is handled. Duration 65 ms by bot id=7440031014
+2024-09-13 21:54:45,692 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 21:54:45,695 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 21:54:45,706 - INFO - VPN_BOT - Starting bot...
+2024-09-13 21:54:45,708 - INFO - aiogram.dispatcher - Start polling
+2024-09-13 21:54:45,753 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 21:56:05,129 - INFO - aiogram.event - Update id=292920987 is not handled. Duration 3 ms by bot id=7440031014
+2024-09-13 21:56:24,433 - INFO - aiogram.event - Update id=292920988 is handled. Duration 90 ms by bot id=7440031014
+2024-09-13 21:56:29,288 - INFO - aiogram.event - Update id=292920989 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-13 21:56:41,491 - INFO - aiogram.event - Update id=292920990 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-13 22:12:29,210 - INFO - aiogram.event - Update id=292920991 is handled. Duration 40 ms by bot id=7440031014
+2024-09-13 22:17:40,009 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-13 22:17:40,011 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:17:40,012 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-13 22:18:06,954 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 22:18:06,955 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 22:18:06,963 - INFO - VPN_BOT - Starting bot...
+2024-09-13 22:21:18,041 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 22:21:18,042 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 22:21:18,051 - INFO - VPN_BOT - Starting bot...
+2024-09-13 22:21:18,054 - INFO - aiogram.dispatcher - Start polling
+2024-09-13 22:21:18,109 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:21:34,250 - INFO - aiogram.event - Update id=292920992 is not handled. Duration 2 ms by bot id=7440031014
+2024-09-13 22:21:34,251 - ERROR - aiogram.event - Cause exception while process update id=292920992 by bot id=7440031014
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 460, in process_pay_balance
+    provider_token=YKASSA_PROVIDER_TOKEN,
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+2024-09-13 22:21:46,398 - INFO - aiogram.event - Update id=292920993 is not handled. Duration 3 ms by bot id=7440031014
+2024-09-13 22:21:46,398 - ERROR - aiogram.event - Cause exception while process update id=292920993 by bot id=7440031014
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 460, in process_pay_balance
+    provider_token=YKASSA_PROVIDER_TOKEN,
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+2024-09-13 22:23:18,000 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-13 22:23:18,001 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:23:18,001 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-13 22:23:38,217 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 22:23:38,217 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 22:23:38,228 - INFO - VPN_BOT - Starting bot...
+2024-09-13 22:23:38,230 - INFO - aiogram.dispatcher - Start polling
+2024-09-13 22:23:38,284 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:24:12,136 - INFO - aiogram.event - Update id=292920994 is not handled. Duration 3 ms by bot id=7440031014
+2024-09-13 22:24:12,138 - ERROR - aiogram.event - Cause exception while process update id=292920994 by bot id=7440031014
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 460, in process_pay_balance
+    provider_token=YKASSA_PROVIDER_TOKEN,
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+2024-09-13 22:24:24,313 - INFO - aiogram.event - Update id=292920995 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-13 22:24:24,313 - ERROR - aiogram.event - Cause exception while process update id=292920995 by bot id=7440031014
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 460, in process_pay_balance
+    provider_token=YKASSA_PROVIDER_TOKEN,
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+2024-09-13 22:27:00,651 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-13 22:27:00,654 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:27:00,655 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-13 22:27:26,687 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 22:27:26,688 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 22:27:26,698 - INFO - VPN_BOT - Starting bot...
+2024-09-13 22:27:26,701 - INFO - aiogram.dispatcher - Start polling
+2024-09-13 22:27:26,758 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:28:06,114 - INFO - aiogram.event - Update id=292920996 is not handled. Duration 2 ms by bot id=7440031014
+2024-09-13 22:28:06,115 - ERROR - aiogram.event - Cause exception while process update id=292920996 by bot id=7440031014
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 460, in process_pay_balance
+    provider_token=YKASSA_PROVIDER_TOKEN,
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+2024-09-13 22:28:18,192 - INFO - aiogram.event - Update id=292920997 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-13 22:28:18,193 - ERROR - aiogram.event - Cause exception while process update id=292920997 by bot id=7440031014
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/opt/VPN_BOT/middlewares/middleware.py", line 13, in __call__
+    return await handler(event, data)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 170, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/opt/VPN_BOT/handlers/user.py", line 460, in process_pay_balance
+    provider_token=YKASSA_PROVIDER_TOKEN,
+NameError: name 'YKASSA_PROVIDER_TOKEN' is not defined
+2024-09-13 22:30:03,491 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-13 22:30:03,492 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:30:03,493 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-13 22:30:27,399 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 22:30:27,399 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 22:30:27,406 - INFO - VPN_BOT - Starting bot...
+2024-09-13 22:30:27,409 - INFO - aiogram.dispatcher - Start polling
+2024-09-13 22:30:27,449 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:30:38,522 - INFO - aiogram.event - Update id=292920998 is handled. Duration 60 ms by bot id=7440031014
+2024-09-13 22:32:08,213 - INFO - aiogram.event - Update id=292920999 is handled. Duration 55 ms by bot id=7440031014
+2024-09-13 22:32:10,341 - INFO - aiogram.event - Update id=292921000 is handled. Duration 185 ms by bot id=7440031014
+2024-09-13 22:32:41,841 - INFO - aiogram.event - Update id=292921001 is handled. Duration 50 ms by bot id=7440031014
+2024-09-13 22:50:10,616 - INFO - aiogram.event - Update id=292921002 is handled. Duration 40 ms by bot id=7440031014
+2024-09-13 22:50:22,087 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-13 22:50:22,088 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:50:22,089 - INFO - aiogram.dispatcher - Polling stopped
+2024-09-13 22:51:00,253 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-13 22:51:00,253 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-13 22:51:00,262 - INFO - VPN_BOT - Starting bot...
+2024-09-13 22:51:00,265 - INFO - aiogram.dispatcher - Start polling
+2024-09-13 22:51:00,319 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-13 22:51:08,718 - INFO - aiogram.event - Update id=292921003 is handled. Duration 94 ms by bot id=7440031014
+2024-09-14 08:34:36,014 - INFO - VPN_BOT - DATABASE_URL: postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db
+2024-09-14 08:34:36,016 - INFO - VPN_BOT - TELEGRAM_API_TOKEN: 7440031014:AAGicNgnetGhFaaLqomU8t0eqt4uZ3_aEX0
+2024-09-14 08:34:36,030 - INFO - VPN_BOT - Starting bot...
+2024-09-14 08:34:36,033 - INFO - aiogram.dispatcher - Start polling
+2024-09-14 08:34:36,080 - INFO - aiogram.dispatcher - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-14 08:34:36,173 - INFO - aiogram.event - Update id=292921004 is handled. Duration 52 ms by bot id=7440031014
+2024-09-14 08:35:54,424 - INFO - aiogram.event - Update id=292921005 is handled. Duration 145 ms by bot id=7440031014
+2024-09-14 08:36:38,369 - INFO - aiogram.event - Update id=292921006 is handled. Duration 31 ms by bot id=7440031014
+2024-09-14 08:36:38,818 - INFO - aiogram.event - Update id=292921007 is handled. Duration 113 ms by bot id=7440031014
+2024-09-14 08:39:46,704 - INFO - aiogram.event - Update id=292921008 is handled. Duration 85 ms by bot id=7440031014
+2024-09-14 09:44:18,443 - WARNING - aiogram.dispatcher - Received SIGINT signal
+2024-09-14 09:44:18,446 - INFO - aiogram.dispatcher - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-14 09:44:18,447 - INFO - aiogram.dispatcher - Polling stopped
