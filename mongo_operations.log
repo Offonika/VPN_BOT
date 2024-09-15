@@ -53,3 +53,108 @@
 2024-09-05 20:51:48,744 - WARNING - Received SIGINT signal
 2024-09-05 20:51:48,746 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
 2024-09-05 20:51:48,747 - INFO - Polling stopped
+2024-09-06 21:39:40,293 - INFO - Starting bot...
+2024-09-06 21:39:40,297 - INFO - Start polling
+2024-09-06 21:39:40,355 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-06 21:39:40,471 - INFO - Update id=292920886 is handled. Duration 66 ms by bot id=7440031014
+2024-09-06 21:46:33,046 - INFO - Update id=292920887 is handled. Duration 151 ms by bot id=7440031014
+2024-09-06 21:46:44,687 - INFO - Update id=292920888 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-06 21:46:55,005 - INFO - Подключение к базе данных успешно установлено.
+2024-09-06 21:46:55,077 - INFO - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-06 21:46:55,077 - INFO - Конфигурация уже существует.
+2024-09-06 21:46:55,161 - INFO - Сессия базы данных закрыта.
+2024-09-06 21:46:55,179 - INFO - Update id=292920889 is handled. Duration 175 ms by bot id=7440031014
+2024-09-06 21:46:57,928 - INFO - Ищем config_file_id для пользователя 448794918
+2024-09-06 21:46:57,929 - INFO - config_file_id для пользователя 448794918: 66d89218dd8233c10a2dc180
+2024-09-06 21:46:57,929 - INFO - Получение коллекции: vpn_configs
+2024-09-06 21:46:57,934 - ERROR - Не удалось найти документ в MongoDB по config_file_id: 66d89218dd8233c10a2dc180
+2024-09-06 21:46:57,992 - INFO - Update id=292920890 is handled. Duration 67 ms by bot id=7440031014
+2024-09-06 21:54:12,947 - INFO - Starting bot...
+2024-09-06 21:54:12,949 - INFO - Start polling
+2024-09-06 21:54:13,003 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-06 21:54:18,233 - WARNING - Received SIGINT signal
+2024-09-06 21:54:18,234 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-06 21:54:18,235 - INFO - Polling stopped
+2024-09-06 21:56:52,798 - INFO - Starting bot...
+2024-09-06 21:56:52,800 - INFO - Start polling
+2024-09-06 21:56:52,861 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-06 21:58:15,342 - INFO - Update id=292920894 is handled. Duration 110 ms by bot id=7440031014
+2024-09-06 21:58:26,542 - INFO - Подключение к базе данных успешно установлено.
+2024-09-06 21:58:26,596 - INFO - Создание новой конфигурации VPN...
+2024-09-06 21:58:26,615 - INFO - VPN keys generated successfully.
+2024-09-06 21:58:26,615 - INFO - Starting search for a free IP address.
+2024-09-06 21:58:26,619 - INFO - Found free IP address: 10.20.0.1
+2024-09-06 21:58:26,620 - INFO - Получение коллекции: vpn_configs
+2024-09-06 21:58:26,620 - INFO - Поиск существующей конфигурации для пользователя 448794918
+2024-09-06 21:58:26,634 - INFO - Конфигурация сохранена в MongoDB с ID 66db50d21343b4c305483630
+2024-09-06 21:58:26,634 - INFO - Конфигурация сохранена в MongoDB с ID 66db50d21343b4c305483630
+2024-09-06 21:58:26,642 - INFO - Новая конфигурация VPN успешно создана и сохранена.
+2024-09-06 21:58:26,647 - INFO - Added new client to WireGuard config: 10.20.0.1
+2024-09-06 21:58:26,765 - INFO - Сессия базы данных закрыта.
+2024-09-06 21:58:26,793 - INFO - Update id=292920895 is handled. Duration 252 ms by bot id=7440031014
+2024-09-06 21:59:18,273 - INFO - Ищем config_file_id для пользователя 448794918
+2024-09-06 21:59:18,273 - INFO - config_file_id для пользователя 448794918: 66db50d21343b4c305483630
+2024-09-06 21:59:18,273 - INFO - Получение коллекции: vpn_configs
+2024-09-06 21:59:18,274 - INFO - Файл конфигурации сохранен в: /var/www/html/configs/448794918.conf
+2024-09-06 21:59:18,275 - INFO - ZIP-архив создан по адресу: /var/www/html/configs/448794918.zip
+2024-09-06 21:59:18,549 - INFO - Update id=292920896 is handled. Duration 280 ms by bot id=7440031014
+2024-09-06 22:10:54,734 - WARNING - Received SIGINT signal
+2024-09-06 22:10:54,736 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-06 22:10:54,737 - INFO - Polling stopped
+2024-09-06 22:11:16,859 - INFO - Starting bot...
+2024-09-06 22:11:16,862 - INFO - Start polling
+2024-09-06 22:11:16,901 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-06 22:48:41,163 - INFO - Update id=292920897 is not handled. Duration 3 ms by bot id=7440031014
+2024-09-07 05:36:04,067 - WARNING - Received SIGINT signal
+2024-09-07 05:36:04,069 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 05:36:04,069 - INFO - Polling stopped
+2024-09-07 05:37:10,337 - INFO - Starting bot...
+2024-09-07 05:37:10,339 - INFO - Start polling
+2024-09-07 05:37:10,391 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 05:37:37,108 - INFO - Update id=292920898 is handled. Duration 57 ms by bot id=7440031014
+2024-09-07 05:37:53,260 - INFO - Update id=292920899 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-07 05:38:13,292 - INFO - Update id=292920900 is not handled. Duration 2 ms by bot id=7440031014
+2024-09-07 05:38:32,793 - INFO - Подключение к базе данных успешно установлено.
+2024-09-07 05:38:32,843 - INFO - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-07 05:38:32,843 - INFO - Конфигурация уже существует.
+2024-09-07 05:38:33,024 - INFO - Сессия базы данных закрыта.
+2024-09-07 05:38:33,047 - INFO - Update id=292920901 is handled. Duration 255 ms by bot id=7440031014
+2024-09-07 05:43:24,750 - WARNING - Received SIGINT signal
+2024-09-07 05:43:24,751 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 05:43:24,752 - INFO - Polling stopped
+2024-09-07 05:43:49,637 - INFO - Starting bot...
+2024-09-07 05:43:49,639 - INFO - Start polling
+2024-09-07 05:43:49,694 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 05:44:04,502 - INFO - Update id=292920902 is handled. Duration 48 ms by bot id=7440031014
+2024-09-07 05:44:09,302 - INFO - Update id=292920903 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-07 05:44:17,224 - INFO - Подключение к базе данных успешно установлено.
+2024-09-07 05:44:17,264 - INFO - Клиент VPN уже существует для пользователя 448794918, проверка наличия конфигурации.
+2024-09-07 05:44:17,265 - INFO - Конфигурация уже существует.
+2024-09-07 05:44:17,314 - INFO - Сессия базы данных закрыта.
+2024-09-07 05:44:17,326 - INFO - Update id=292920904 is handled. Duration 102 ms by bot id=7440031014
+2024-09-07 05:57:46,881 - WARNING - Received SIGINT signal
+2024-09-07 05:57:46,883 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 05:57:46,884 - INFO - Polling stopped
+2024-09-07 05:58:14,745 - INFO - Starting bot...
+2024-09-07 05:58:14,747 - INFO - Start polling
+2024-09-07 05:58:14,798 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 05:58:27,901 - INFO - Update id=292920905 is handled. Duration 52 ms by bot id=7440031014
+2024-09-07 06:00:16,504 - INFO - Update id=292920906 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-07 06:10:02,513 - WARNING - Received SIGINT signal
+2024-09-07 06:10:02,515 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 06:10:02,515 - INFO - Polling stopped
+2024-09-07 06:10:31,578 - INFO - Starting bot...
+2024-09-07 06:10:31,581 - INFO - Start polling
+2024-09-07 06:10:31,623 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 06:35:44,472 - INFO - Update id=292920907 is not handled. Duration 3 ms by bot id=7440031014
+2024-09-07 06:42:52,271 - WARNING - Received SIGINT signal
+2024-09-07 06:42:52,273 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 06:42:52,273 - INFO - Polling stopped
+2024-09-07 06:43:18,318 - INFO - Starting bot...
+2024-09-07 06:43:18,320 - INFO - Start polling
+2024-09-07 06:43:18,362 - INFO - Run polling for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 06:44:20,389 - INFO - Update id=292920908 is handled. Duration 80 ms by bot id=7440031014
+2024-09-07 06:44:26,206 - INFO - Update id=292920909 is not handled. Duration 1 ms by bot id=7440031014
+2024-09-07 06:51:53,443 - WARNING - Received SIGINT signal
+2024-09-07 06:51:53,444 - INFO - Polling stopped for bot @OffonikaVPN_bot id=7440031014 - 'OffonikaVPN'
+2024-09-07 06:51:53,445 - INFO - Polling stopped

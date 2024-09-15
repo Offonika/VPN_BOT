@@ -44,7 +44,6 @@ class VpnClient(Base):
 
     user = relationship("User", back_populates="vpn_clients")
 
-
 class Referral(Base):
     __tablename__ = 'referrals'
     
@@ -56,6 +55,11 @@ class Referral(Base):
     referrer = relationship("User", foreign_keys=[referrer_id], back_populates="referrals", overlaps="referrer,referral")
     referral = relationship("User", foreign_keys=[referral_id], back_populates="referred_by", overlaps="referrer,referral")
 
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean, Float, DateTime, Numeric
+from sqlalchemy.orm import relationship
+from .database import Base
+from datetime import datetime
+
 class Router(Base):
     __tablename__ = 'routers'
     
@@ -63,19 +67,23 @@ class Router(Base):
     serial_number = Column(String, nullable=False, unique=True)
     model = Column(String, nullable=False)
     mac_address = Column(String, nullable=False, unique=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    sku = Column(String, nullable=False, index=True)  # Поле SKU
+    barcode = Column(String, nullable=True, unique=True)  # Поле штрихкода
+    user_id = Column(Integer, ForeignKey('users.id'))  # Привязка к пользователю
     vpn_config = Column(String, nullable=True)
     admin_access = Column(String)
     sale_date = Column(Date)
     warranty_expiration = Column(Date)
-    status = Column(String)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    status = Column(String, default="available")  # Добавлено поле статуса
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, onupdate=datetime.utcnow)
     comments = Column(String)
     subdomain = Column(String, nullable=True, unique=True)  # Поддомен
     dns_record_id = Column(String, nullable=True)  # ID DNS-записи из Timeweb
-
     user = relationship("User", back_populates="routers")
+    is_for_sale = Column(Boolean, default=False) 
+
+
 
 class Payment(Base):
     __tablename__ = 'payments'
