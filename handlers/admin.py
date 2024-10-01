@@ -10,11 +10,13 @@ from db.models import Router
 from utils.barcode_scanner import scan_label
 from io import BytesIO
 import logging
+import secrets
 
 class RouterRegistration(StatesGroup):
     waiting_for_serial_number = State()
     waiting_for_model = State()
     waiting_for_mac_address = State()
+    waiting_for_sku = State()
 
 async def cmd_register_router(message: types.Message):
     """Обработчик команды /register_router для начала процесса регистрации роутера."""
@@ -83,33 +85,66 @@ async def process_model(message: types.Message, state: FSMContext):
     await state.set_state(RouterRegistration.waiting_for_mac_address)
 
 async def process_mac_address(message: types.Message, state: FSMContext):
-    """Обработка MAC-адреса и завершение регистрации роутера."""
+    """Обработка MAC-адреса и запрос SKU."""
+    # Сохраняем MAC-адрес в состояние FSM
+    await state.update_data(mac_address=message.text.lower().replace(':', ''))  # Переводим MAC-адрес в нижний регистр и убираем двоеточия
+
+    # Запрашиваем у пользователя SKU роутера
+    await message.answer("Введите SKU роутера:")
+
+    # Переключаемся на ожидание SKU
+    await state.set_state(RouterRegistration.waiting_for_sku)
+
+
+import secrets  # Добавим импорт для генерации токена
+
+# В вашем файле admin.py
+
+async def process_sku(message: types.Message, state: FSMContext):
+    """Обработка SKU и завершение регистрации роутера."""
+    # Получаем все данные, которые были сохранены в ходе диалога
     user_data = await state.get_data()
     serial_number = user_data['serial_number']
     model = user_data['model']
-    mac_address = message.text.lower().replace(':', '')  # Переводим MAC-адрес в нижний регистр и убираем двоеточия
+    mac_address = user_data['mac_address']
+    sku = message.text  # Получаем SKU от пользователя
+
+    # Логируем полученные данные
+    logging.info(f"Серийный номер: {serial_number}, Модель: {model}, MAC-адрес: {mac_address}, SKU: {sku}")
 
     # Сформируем уникальный subdomain
-    subdomain = f"{mac_address}@offonika.ru"
+    subdomain = f"{mac_address}.offonika.ru"
+    
+    # Генерируем токен аутентификации
+    auth_token = secrets.token_hex(32)
 
     session = SessionLocal()
     try:
+        # Добавляем новый роутер с введёнными данными в базу данных
         new_router = Router(
             serial_number=serial_number,
             model=model,
             mac_address=mac_address,
-            subdomain=subdomain  # Сохраняем сформированный subdomain
+            sku=sku,  # Добавляем SKU
+            subdomain=subdomain,
+            auth_token=auth_token  # Добавляем токен аутентификации
         )
         session.add(new_router)
         session.commit()
-        await message.answer(f"Роутер {model} с серийным номером {serial_number} и MAC-адресом {mac_address} успешно зарегистрирован.")
+
+        # Сообщаем об успешной регистрации роутера
+        await message.answer(f"Роутер {model} с серийным номером {serial_number}, MAC-адресом {mac_address} и SKU {sku} успешно зарегистрирован.\nТокен: {auth_token}")
     except Exception as e:
         logging.error(f"Ошибка при регистрации роутера: {e}")
         await message.answer("Произошла ошибка при регистрации роутера.")
     finally:
         session.close()
-    
-    await state.clear()  # Заменяем finish() на clear()
+
+    # Очищаем состояние FSM после завершения процесса
+    await state.clear()
+
+
+
 
 def register_handlers_admin(dp: Dispatcher):
     """Регистрация обработчиков команд для администратора."""
@@ -120,3 +155,5 @@ def register_handlers_admin(dp: Dispatcher):
     dp.message.register(process_serial_number, RouterRegistration.waiting_for_serial_number)
     dp.message.register(process_model, RouterRegistration.waiting_for_model)
     dp.message.register(process_mac_address, RouterRegistration.waiting_for_mac_address)
+    dp.message.register(process_sku, RouterRegistration.waiting_for_sku)
+

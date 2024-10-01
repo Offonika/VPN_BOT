@@ -8,6 +8,8 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, LabeledPri
 from db.database import SessionLocal
 from db.models import User, VpnClient, Payment
 from utils.vpn_config import generate_vpn_keys, generate_vpn_config, add_client_to_wg_config
+from utils.vpn_config import save_config_to_mongodb
+
 from utils.ip_manager import get_free_ip
 from utils.qr_generator import generate_qr_code
 import logging
@@ -422,61 +424,93 @@ async def handle_get_vpn_key_as_callback(callback_query: types.CallbackQuery):
         logging.info("Сессия базы данных закрыта.")
         await callback_query.answer()
 
+
 @router.callback_query(F.data == "download_config")
 async def handle_download_config(callback_query: types.CallbackQuery):
-    await handle_download_config_as_callback(callback_query)
+    await handle_download_config_as_message(callback_query.message)
 
-async def handle_download_config_as_callback(callback_query: types.CallbackQuery):
-    """Функция для отправки ссылки на скачивание конфигурации в ответ на callback_query."""
+
+async def handle_get_vpn_key_as_callback(callback_query: types.CallbackQuery):
+    """Обработчик создания VPN-клиента в ответ на callback_query."""
     telegram_id = callback_query.from_user.id
     session = SessionLocal()
 
     try:
-        # Получаем пользователя из базы данных
+        logging.info("Подключение к базе данных успешно установлено.")
+        
+        # Поиск пользователя в базе данных
         user = session.query(User).filter(User.telegram_id == telegram_id).first()
+
         if not user:
-            await callback_query.message.answer("Пользователь не найден.")
-            return
+            # Если пользователя нет, создаем нового пользователя
+            logging.info(f"Пользователь {telegram_id} не найден, создаем нового.")
+            user = User(
+                telegram_id=telegram_id,
+                username=callback_query.from_user.username or '',
+                full_name=callback_query.from_user.full_name or '',
+            )
+            session.add(user)
+            session.commit()
+            await callback_query.message.answer("Вы были зарегистрированы в системе.")
 
-        # Получаем VPN клиента пользователя
+        # Поиск VPN-клиента в базе данных
         client = session.query(VpnClient).filter(VpnClient.user_id == user.id).first()
-        if client and client.config_file_id:
-            # Получаем конфигурационный файл из MongoDB
-            collection = get_mongo_collection('vpn_configs')
-            config_document = collection.find_one({"_id": ObjectId(client.config_file_id)})
-            if not config_document:
-                await callback_query.message.answer("Не удалось найти конфигурационный файл.")
-                return
 
-            config_content = config_document["config"]
-
-            # Сохранение конфигурации во временный файл
-            temp_file_path = os.path.join("/var/www/html/configs", f"{telegram_id}.conf")
-            with open(temp_file_path, 'w') as temp_file:
-                temp_file.write(config_content)
-
-            # Создание ZIP-архива
-            zip_file_path = os.path.join("/var/www/html/configs", f"{telegram_id}.zip")
-            with zipfile.ZipFile(zip_file_path, 'w') as zipf:
-                zipf.write(temp_file_path, arcname=f"{telegram_id}.conf")
-
-            # Проверяем, что файл существует и не пустой
-            if os.path.exists(zip_file_path) and os.path.getsize(zip_file_path) > 0:
-                base_url = "http://offonika.ru/configs/"
-                config_filename = f"{telegram_id}.zip"
-                config_url = base_url + config_filename
-                await callback_query.message.answer(f"Скачайте ваш конфигурационный файл в архиве по следующей ссылке: {config_url}")
+        if client:
+            # Если клиент уже существует, проверяем наличие конфигурации
+            logging.info(f"Клиент VPN уже существует для пользователя {telegram_id}. Проверка конфигурации.")
+            if not client.config_file_id:
+                # Если конфигурация не найдена, создаем новую
+                logging.info("Конфигурационный файл отсутствует, создаем новый.")
+                config_content = generate_vpn_config(client)
+                config_file_id = save_config_to_mongodb(config_content, telegram_id)
+                client.config_file_id = str(config_file_id)
+                session.commit()
+                add_client_to_wg_config(client)
+                await callback_query.message.answer("Конфигурация VPN создана.")
             else:
-                await callback_query.message.answer("Ошибка при создании ZIP-архива конфигурационного файла.")
+                await callback_query.message.answer("VPN клиент уже создан.")
         else:
-            await callback_query.message.answer("VPN клиент не найден. Пожалуйста, сначала зарегистрируйтесь.")
+            # Если VPN клиент не существует, создаем его и генерируем ключи
+            logging.info("Создание новой конфигурации VPN...")
+            private_key, public_key = generate_vpn_keys()  # Генерация ключей
+            ip_address = get_free_ip(session)
+
+            new_client = VpnClient(
+                user_id=user.id,
+                private_key=private_key,
+                public_key=public_key,
+                address=ip_address,
+                dns=config.VPN_DNS,
+                allowed_ips="0.0.0.0/0",
+                endpoint=config.VPN_ENDPOINT
+            )
+
+            config_content = generate_vpn_config(new_client)
+            config_file_id = save_config_to_mongodb(config_content, telegram_id)
+            new_client.config_file_id = str(config_file_id)
+            session.add(new_client)
+            session.commit()
+
+            # Добавляем клиента в конфигурацию WireGuard
+            add_client_to_wg_config(new_client)
+
+            await callback_query.message.answer("VPN клиент успешно создан.")
+
+        # Показываем кнопки для дальнейших действий
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="Скачать конфигурацию", callback_data="download_config")],
+            [InlineKeyboardButton(text="QR код", callback_data="get_qr_code")]
+        ])
+        await callback_query.message.answer("Выберите действие:", reply_markup=keyboard)
 
     except Exception as e:
-        logging.error(f"Произошла ошибка при обработке запроса на скачивание конфигурации: {e}")
+        logging.error(f"Произошла ошибка при обработке запроса VPN: {e}")
         await callback_query.message.answer("Произошла ошибка при обработке вашего запроса.")
     finally:
         session.close()
         await callback_query.answer()
+
 
 
 @router.callback_query(F.data == "get_qr_code")

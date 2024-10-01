@@ -1,4 +1,8 @@
+
+from dotenv import load_dotenv
 import os
+
+load_dotenv()  # Загружаем переменные окружения из файла .env
 
 # Определение базовой директории
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -45,7 +49,8 @@ BASE_IP = "10.20."
 
 # MongoDB URI
 MONGO_URI = "mongodb://admin:YX91lYxAPxvlyTFGiO26h@localhost:27017/vpn_bot?authSource=admin"
-
+DATABASE_URL = 'mysql+mysqlclient://Admin:0F9CS7NPxKpOYV1DCzm7q@localhost/OffonikaBaza'
+#DATABASE_URL = os.getenv("DATABASE_URL")
 #YKASSA
 YKASSA_PROVIDER_TOKEN = '381764678:TEST:93797'
 YKASSA_SHOP_ID = '506751'

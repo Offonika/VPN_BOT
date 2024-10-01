@@ -1,4 +1,3 @@
-#env.py
 import os
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
@@ -24,6 +23,13 @@ from db.models import Base  # Импортируем ваш Base
 
 target_metadata = Base.metadata
 
+# Функция для фильтрации таблиц WordPress
+def include_object(object, name, type_, reflected, compare_to):
+    if type_ == "table" and name.startswith("wp_"):
+        # Исключаем таблицы WordPress (начинающиеся с wp_)
+        return False
+    return True
+
 def run_migrations_offline():
     """Запуск миграций в 'offline' режиме."""
     url = config.get_main_option("sqlalchemy.url")
@@ -32,6 +38,7 @@ def run_migrations_offline():
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        include_object=include_object  # Добавляем фильтрацию таблиц WordPress
     )
 
     with context.begin_transaction():
@@ -48,7 +55,8 @@ def run_migrations_online():
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
-            target_metadata=target_metadata
+            target_metadata=target_metadata,
+            include_object=include_object  # Добавляем фильтрацию таблиц WordPress
         )
 
         with context.begin_transaction():
@@ -58,4 +66,5 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
 

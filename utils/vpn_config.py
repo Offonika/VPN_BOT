@@ -71,6 +71,7 @@ def restart_wireguard():
         return False
 
 
+
 def generate_vpn_config(client: VpnClient):
     """
     Генерирует конфигурационный файл WireGuard для нового клиента.
@@ -95,10 +96,22 @@ PersistentKeepalive = 25
 
 def add_client_to_wg_config(client: VpnClient):
     """
-    Добавляет или обновляет клиента в конфигурационном файле WireGuard (wg0.conf).
+    Добавляет или обновляет клиента в конфигурации WireGuard (wg0.conf).
     """
-    remove_vpn_user(client.public_key)
-    add_vpn_user(client.public_key, client.address)
+    if not remove_vpn_user(client.public_key):
+        logging.error(f"Не удалось удалить клиента с публичным ключом {client.public_key} из WireGuard.")
+        return  # Остановить дальнейшее выполнение в случае ошибки удаления
+    
+    if add_vpn_user(client.public_key, client.address):
+        logging.info(f"Клиент с публичным ключом {client.public_key} добавлен в WireGuard с IP-адресом {client.address}.")
+        
+        # Перезапускаем WireGuard для применения изменений
+        if restart_wireguard():
+            logging.info("WireGuard успешно перезапущен.")
+        else:
+            logging.error("Не удалось перезапустить WireGuard.")
+    else:
+        logging.error(f"Не удалось добавить клиента с публичным ключом {client.public_key} в WireGuard.")
 
 
 def check_wireguard_status():
@@ -143,13 +156,13 @@ def save_config_to_mongodb(config_content: str, telegram_id: int):
 
 def update_vpn_client_config(session: Session, telegram_id: int):
     """
-    Обновляет конфигурацию клиента в PostgreSQL, MongoDB и WireGuard.
+    Обновляет конфигурацию клиента в MySQL, MongoDB и WireGuard.
     """
     try:
-        # Получаем клиента из PostgreSQL по Telegram ID
+        # Получаем клиента из MySQLL по Telegram ID
         client = session.query(VpnClient).join(User).filter(User.telegram_id == telegram_id).first()
         if not client:
-            logging.error(f"Клиент с Telegram ID {telegram_id} не найден в PostgreSQL.")
+            logging.error(f"Клиент с Telegram ID {telegram_id} не найден в MySQL.")
             return
 
         # Проверяем наличие клиента в WireGuard
@@ -167,18 +180,21 @@ def update_vpn_client_config(session: Session, telegram_id: int):
             client.address = client_in_wg['ip_address']
             session.commit()
 
+        # Генерация новой конфигурации
         config_content = generate_vpn_config(client)
 
         # Сохраняем новую конфигурацию в MongoDB
         config_file_id = save_config_to_mongodb(config_content, telegram_id)
-        client.config_file_id = str(config_file_id)  # Обновляем config_file_id в PostgreSQL
-        session.commit()  # Сохраняем изменения в PostgreSQL
+        client.config_file_id = str(config_file_id)  # Обновляем config_file_id в MySQLL
+        session.commit()  # Сохраняем изменения в MySQLL
 
+        # Добавляем клиента в WireGuard
         add_client_to_wg_config(client)
         logging.info(f"Конфигурация для клиента с Telegram ID {telegram_id} обновлена.")
 
     except Exception as e:
         logging.error(f"Ошибка при обновлении конфигурации клиента: {e}")
+
 
 
 
@@ -225,7 +241,9 @@ def get_client_info_from_wg(public_key: str):
                 parts = line.split()
                 if len(parts) >= 3:
                     return {"public_key": public_key, "ip_address": parts[1]}
+        logging.info(f"Клиент с публичным ключом {public_key} не найден в WireGuard.")
         return None
     except subprocess.CalledProcessError as e:
         logging.error(f"Ошибка при получении информации о клиенте из WireGuard: {e}")
         return None
+

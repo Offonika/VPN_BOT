@@ -1,18 +1,16 @@
-
 # database.py
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# Настройка URL базы данных из переменной окружения
-SQLALCHEMY_DATABASE_URL = 'postgresql+psycopg2://vpn_bot_user:12345@147.45.232.192:5432/vpn_db'
-
+# Настройка URL базы данных из переменной окружения или напрямую
+SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL', 'mysql+pymysql://Admin:0F9CS7NPxKpOYV1DCzm7q@localhost/OffonikaBaza')
 
 if not SQLALCHEMY_DATABASE_URL:
     raise ValueError("DATABASE_URL is not set in environment variables")
 
-# Создание двигателя для взаимодействия с базой данных PostgreSQL
+# Создание двигателя для взаимодействия с базой данных MySQL
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 # Создание локальной сессии базы данных
@@ -39,3 +37,4 @@ def get_db():
         yield db
     finally:
         db.close()
+
